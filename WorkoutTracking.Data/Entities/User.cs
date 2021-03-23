@@ -12,7 +12,8 @@ namespace WorkoutTracking.Data.Entities
         public int Id { get; set; }
         public string Name{ get; set; }
         public UserAccess Access { get; set; }
-        public ICollection<User> Friends { get; set; }
+        public ICollection<User> FriendsToUser { get; set; }
+        public ICollection<User> FriendsFromUser { get; set; }
         public ICollection<User> Followers { get; set; }
         public ICollection<User> Following { get; set; }
         public ICollection<TrainingHistory> TrainingHistory { get; set; }

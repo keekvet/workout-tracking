@@ -13,7 +13,16 @@ namespace WorkoutTracking.Data.EntitiesConfigurations
     {
         public void Configure(EntityTypeBuilder<TrainingTemplate> builder)
         {
-            throw new NotImplementedException();
+            builder.Property(t => t.Name).HasMaxLength(50).IsRequired();
+            builder.Property(t => t.Description).HasMaxLength(500);
+
+            builder
+                .HasOne(t => t.Creator)
+                .WithMany(u => u.TrainingTemplates);
+
+            builder
+                .HasOne(t => t.Category)
+                .WithMany(c => c.TrainingTemplates);
         }
     }
 }

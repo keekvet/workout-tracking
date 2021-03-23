@@ -13,7 +13,12 @@ namespace WorkoutTracking.Data.EntitiesConfigurations
     {
         public void Configure(EntityTypeBuilder<ScheduledTraining> builder)
         {
-            throw new NotImplementedException();
+            builder.Property(s => s.Note).HasMaxLength(500);
+            builder.Property(s => s.Day).IsRequired();
+            builder.Property(s => s.StartTime).IsRequired();
+            builder
+                .HasOne(s => s.Template)
+                .WithMany(t => t.ScheduledTrainings);
         }
     }
 }

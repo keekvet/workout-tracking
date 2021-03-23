@@ -13,7 +13,11 @@ namespace WorkoutTracking.Data.EntitiesConfigurations
     {
         public void Configure(EntityTypeBuilder<ExerciseProperty> builder)
         {
-            throw new NotImplementedException();
+            builder.Property(e => e.IsContinious).IsRequired();
+            builder.Property(e => e.Duration).IsRequired();
+            builder
+                .HasOne(e => e.Exercise)
+                .WithMany(e => e.Properties);
         }
     }
 }

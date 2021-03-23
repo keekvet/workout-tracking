@@ -15,16 +15,14 @@ namespace WorkoutTracking.Data.EntitiesConfigurations
         {
             builder.Property(e => e.Note).HasMaxLength(500);
             builder.Property(e => e.Start).IsRequired();
-         
+
             builder
                 .HasOne(e => e.Exercise)
-                .WithMany(e => e.History)
-                .IsRequired();
+                .WithMany(e => e.History);
 
             builder
                 .HasOne(e => e.TrainingHistory)
-                .WithMany(t => t.ExerciseHistory)
-                .IsRequired();
+                .WithMany(t => t.ExerciseHistory);
         }
     }
 }

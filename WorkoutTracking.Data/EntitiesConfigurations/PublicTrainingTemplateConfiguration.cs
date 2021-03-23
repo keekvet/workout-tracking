@@ -13,7 +13,10 @@ namespace WorkoutTracking.Data.EntitiesConfigurations
     {
         public void Configure(EntityTypeBuilder<PublicTrainingTemplate> builder)
         {
-            throw new NotImplementedException();
+            builder
+                .HasOne(p => p.Template)
+                .WithOne(t => t.publicTraining)
+                .HasForeignKey<PublicTrainingTemplate>(t => t.TemplateId);
         }
     }
 }

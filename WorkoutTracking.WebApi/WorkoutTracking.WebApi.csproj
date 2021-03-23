@@ -19,8 +19,4 @@
     <ProjectReference Include="..\WorkoutTracking.Data\WorkoutTracking.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>

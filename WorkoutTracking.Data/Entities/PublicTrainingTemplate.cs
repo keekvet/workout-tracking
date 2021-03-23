@@ -9,7 +9,9 @@ namespace WorkoutTracking.Data.Entities
     public class PublicTrainingTemplate
     {
         public int Id { get; set; }
-        public ICollection<User> Users { get; set; }
+        public int TemplateId { get; set; }
         public TrainingTemplate Template { get; set; }
+        public ICollection<User> Users { get; set; }
+
     }
 }
