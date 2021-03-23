@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkoutTracking.WebApi", "Workout tracking\WorkoutTracking.WebApi.csproj", "{EFF635B9-F9FE-44A6-BEDC-1309F273F49D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkoutTracking.Data", "WorkoutTracking.Data\WorkoutTracking.Data.csproj", "{F16FF465-596A-4377-A5BB-2463D038D5BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkoutTracking.Data", "WorkoutTracking.Data\WorkoutTracking.Data.csproj", "{F16FF465-596A-4377-A5BB-2463D038D5BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkoutTracking.Domain", "WorkoutTracking.Domain\WorkoutTracking.Domain.csproj", "{1C337C70-6AD3-4520-830C-9A9736AADA9C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkoutTracking.WebApi", "WorkoutTracking.WebApi\WorkoutTracking.WebApi.csproj", "{633230FF-3991-4E68-B7B7-3954FA4ADE0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EFF635B9-F9FE-44A6-BEDC-1309F273F49D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EFF635B9-F9FE-44A6-BEDC-1309F273F49D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EFF635B9-F9FE-44A6-BEDC-1309F273F49D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EFF635B9-F9FE-44A6-BEDC-1309F273F49D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F16FF465-596A-4377-A5BB-2463D038D5BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F16FF465-596A-4377-A5BB-2463D038D5BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F16FF465-596A-4377-A5BB-2463D038D5BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F16FF465-596A-4377-A5BB-2463D038D5BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C337C70-6AD3-4520-830C-9A9736AADA9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C337C70-6AD3-4520-830C-9A9736AADA9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C337C70-6AD3-4520-830C-9A9736AADA9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C337C70-6AD3-4520-830C-9A9736AADA9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{633230FF-3991-4E68-B7B7-3954FA4ADE0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{633230FF-3991-4E68-B7B7-3954FA4ADE0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{633230FF-3991-4E68-B7B7-3954FA4ADE0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{633230FF-3991-4E68-B7B7-3954FA4ADE0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace WorkoutTracking.Data.Entities
 {
-    public class TrainingTemplate
+    public class TrainingCategory
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public TrainingCategory Category { get; set; }
-        public ICollection<Exercise> Exercises { get; set; }
-        public User Creator { get; set; }
     }
 }
