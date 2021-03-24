@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WorkoutTracking.Data\WorkoutTracking.Data.csproj" />
+    <ProjectReference Include="..\WorkoutTracking.Domain\WorkoutTracking.Domain.csproj" />
   </ItemGroup>
 
 </Project>

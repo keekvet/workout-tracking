@@ -1,2 +1,2 @@
-﻿1. add isRequired and on delete to entities
+﻿1. add isRequired and on delete to entities +
 2. add friend request list to entities

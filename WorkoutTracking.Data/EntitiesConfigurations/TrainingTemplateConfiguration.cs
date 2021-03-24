@@ -22,7 +22,8 @@ namespace WorkoutTracking.Data.EntitiesConfigurations
 
             builder
                 .HasOne(t => t.Category)
-                .WithMany(c => c.TrainingTemplates);
+                .WithMany(c => c.TrainingTemplates)
+                .IsRequired();
         }
     }
 }

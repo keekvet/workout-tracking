@@ -18,11 +18,13 @@ namespace WorkoutTracking.Data.EntitiesConfigurations
 
             builder
                 .HasOne(e => e.Exercise)
-                .WithMany(e => e.History);
+                .WithMany(e => e.History)
+                .IsRequired();
 
             builder
                 .HasOne(e => e.TrainingHistory)
-                .WithMany(t => t.ExerciseHistory);
+                .WithMany(t => t.ExerciseHistory)
+                .IsRequired();
         }
     }
 }

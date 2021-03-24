@@ -9,6 +9,12 @@ namespace WorkoutTracking.Data.Repositories
 {
     public interface IRepository<TEntity>
     {
-        IQueryable<TEntity> Query(params Expression<Func<TEntity, object>>[] includes);
+        IQueryable<TEntity> Query();
+        Task<TEntity> GetByIdAsync(int id);
+        Task<TEntity> AddAsync(TEntity entity);
+        Task<TEntity> UpdateAsync(TEntity entity);
+        Task<bool> DeleteAsync(TEntity entity);
+        Task AddRangeAsync(IEnumerable<TEntity> entity);
+        Task DeleteRangeAsync(IEnumerable<TEntity> entity);
     }
 }

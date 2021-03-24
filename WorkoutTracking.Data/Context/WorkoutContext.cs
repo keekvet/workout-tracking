@@ -20,6 +20,7 @@ namespace WorkoutTracking.Data.Context
         public DbSet<TrainingHistory> TrainingHistories { get; set; }
         public DbSet<TrainingTemplate> TrainingTemplates { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<FriendRequest> FriendRequests { get; set; }
 
         public WorkoutContext(DbContextOptions options) : base(options)
         {
@@ -37,6 +38,7 @@ namespace WorkoutTracking.Data.Context
             modelBuilder.ApplyConfiguration(new TrainingHistoryConfiguration());
             modelBuilder.ApplyConfiguration(new TrainingTemplateConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new FriendRequestConfiguration());
         }
     }
 }

@@ -15,8 +15,7 @@ namespace WorkoutTracking.Data.EntitiesConfigurations
         {
             builder
                 .HasOne(p => p.Template)
-                .WithOne(t => t.publicTraining)
-                .HasForeignKey<PublicTrainingTemplate>(t => t.TemplateId);
+                .WithOne(t => t.publicTraining);
         }
     }
 }

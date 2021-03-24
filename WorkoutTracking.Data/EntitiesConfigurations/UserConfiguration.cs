@@ -21,12 +21,14 @@ namespace WorkoutTracking.Data.EntitiesConfigurations
                 .WithMany(t => t.Users);
 
             builder
-                .HasMany(u => u.FriendsToUser)
-                .WithMany(u => u.FriendsFromUser);
-            
+                .HasMany(u => u.FriendsTo)
+                .WithMany(u => u.FriendsFrom)
+                .UsingEntity(x => x.ToTable("UserFriends"));
+
             builder
                 .HasMany(u => u.Followers)
-                .WithMany(u => u.Following);
+                .WithMany(u => u.Following)
+                .UsingEntity(x => x.ToTable("UserFollowers"));
         }
     }
 }

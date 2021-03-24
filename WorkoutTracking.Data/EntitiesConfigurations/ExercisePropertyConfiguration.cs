@@ -17,7 +17,8 @@ namespace WorkoutTracking.Data.EntitiesConfigurations
             builder.Property(e => e.Duration).IsRequired();
             builder
                 .HasOne(e => e.Exercise)
-                .WithMany(e => e.Properties);
+                .WithMany(e => e.Properties)
+                .IsRequired();
         }
     }
 }

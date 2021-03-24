@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Implementations\" />
-    <Folder Include="Services\Interfaces\" />
+    <ProjectReference Include="..\WorkoutTracking.Data\WorkoutTracking.Data.csproj" />
   </ItemGroup>
 
 </Project>
