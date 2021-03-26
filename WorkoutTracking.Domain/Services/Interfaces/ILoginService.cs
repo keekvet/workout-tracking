@@ -7,8 +7,8 @@ using WorkoutTracking.Data.Entities;
 
 namespace WorkoutTracking.Domain.Services.Interfaces
 {
-    public interface IFollowerService
+    public interface ILoginService
     {
-        Task<User> GetUserFollowerByIdAsync(User user, User follower);
+        Task<User> LoginAsync(User user);
     }
 }

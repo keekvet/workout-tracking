@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -7,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace WorkoutTracking.Data.Repositories
 {
-    public interface IRepository<TEntity>
+    public interface IRepository<TEntity> where TEntity : class
     {
-        IQueryable<TEntity> Query();
+        DbSet<TEntity> Entities { get; }
+
         Task<TEntity> GetByIdAsync(int id);
         Task<TEntity> AddAsync(TEntity entity);
         Task<TEntity> UpdateAsync(TEntity entity);

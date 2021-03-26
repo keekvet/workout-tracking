@@ -1,2 +1,3 @@
 ﻿1. add isRequired and on delete to entities +
-2. add friend request list to entities
+2. add friend request list to entities +
+3. add user password and encryption

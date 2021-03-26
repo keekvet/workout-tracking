@@ -13,8 +13,14 @@ namespace WorkoutTracking.Data.EntitiesConfigurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            builder.HasIndex(u => u.Name).IsUnique();
+            
             builder.Property(u => u.Name).HasMaxLength(50).IsRequired();
+            builder.Property(u => u.Password).HasMaxLength(20).IsRequired();
+            builder.Property(u => u.Salt).HasMaxLength(20).IsRequired();
             builder.Property(u => u.Access).IsRequired();
+
+            builder.Ignore(u => u.JwtToken);
 
             builder
                 .HasMany(u => u.PublicTrainingTemplates)

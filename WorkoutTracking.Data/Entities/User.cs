@@ -11,6 +11,9 @@ namespace WorkoutTracking.Data.Entities
     {
         public int Id { get; set; }
         public string Name{ get; set; }
+        public byte[] Password { get; set; }
+        public byte[] Salt { get; set; }
+        public string JwtToken { get; set; }
         public UserAccess Access { get; set; }
         public ICollection<User> FriendsTo { get; set; }
         public ICollection<User> FriendsFrom { get; set; }

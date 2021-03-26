@@ -11,6 +11,8 @@ namespace WorkoutTracking.Domain.Services.Interfaces
     {
         Task<User> AddUserAsync(User user);
         Task<bool> DeleteUserAsync(User user);
-        Task<User> FindUserByNameAsync(string name);
+        Task<User> UpdateUserAsync(User user);
+        Task<User> GetUserByIdAsync(int id);
+        Task<User> GetUserByNameAsync(string name);
     }
 }

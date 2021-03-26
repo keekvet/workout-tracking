@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WorkoutTracking.Data.Entities;
+using WorkoutTracking.Domain.Dto;
 
 namespace WorkoutTracking.Domain.Services.Interfaces
 {
-    public interface IFollowerService
+    interface IEncryptionService
     {
-        Task<User> GetUserFollowerByIdAsync(User user, User follower);
+        Task<PasswordDto> EncryptAsync(byte[] data);
     }
 }
