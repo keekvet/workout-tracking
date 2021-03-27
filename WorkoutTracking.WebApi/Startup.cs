@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Workout_tracking.ServiceExtention;
 using WorkoutTracking.Data.Context;
 using WorkoutTracking.Domain.ConfigurationTemplates;
 
@@ -38,6 +39,10 @@ namespace WorkoutTracking
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WorkoutTracking", Version = "v1" });
             });
 
+            services.AddServices();
+            services.AddConfiguration(Configuration);
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddDbContext<WorkoutContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -45,7 +50,7 @@ namespace WorkoutTracking
                 .AddJwtBearer(options =>
                 {
                     JwtConfiguration jwtConfiguration = 
-                        Configuration.GetSection("JwtConfiguration").Get<JwtConfiguration>();
+                        Configuration.GetSection(nameof(JwtConfiguration)).Get<JwtConfiguration>();
                     
                     options.RequireHttpsMetadata = true;
                     options.TokenValidationParameters = new TokenValidationParameters
@@ -57,7 +62,7 @@ namespace WorkoutTracking
                         ValidIssuer = jwtConfiguration.Issuer,
                         ValidAudience = jwtConfiguration.Audience,
                         IssuerSigningKey = new SymmetricSecurityKey(
-                            Encoding.ASCII.GetBytes(jwtConfiguration.Key))
+                            Encoding.UTF8.GetBytes(jwtConfiguration.Key))
                     };
                 });
         }

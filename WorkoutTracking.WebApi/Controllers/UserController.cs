@@ -6,52 +6,48 @@ using System.Linq;
 using System.Threading.Tasks;
 using WorkoutTracking.Data.Context;
 using WorkoutTracking.Data.Entities;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using WorkoutTracking.Domain.Services.Implementations;
+using WorkoutTracking.Domain.Services.Interfaces;
 
 namespace Workout_tracking.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/users")]
     public class UserController : ControllerBase
     {
-        private WorkoutContext DbContext;
-        public UserController(WorkoutContext context)
+        private readonly IUserService userService;
+
+        public UserController(IUserService userService)
         {
-            DbContext = context;
+            this.userService = userService;
         }
 
-        // GET: api/<UserController>
-        [HttpGet]
-        public IEnumerable<User> Get()
+        /// <summary>
+        /// Get User by name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        [HttpGet("{name}")]
+        public async Task<IActionResult> GetUserByNameAsync(string name)
         {
-            return DbContext.Users.ToList();
+            return Ok(await userService.GetUserByNameAsync(name));
         }
 
-        // GET api/<UserController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        /// <summary>
+        /// Get users who's names include "text" parameter from "offset" parameter,
+        /// maximum "count" 100 users per request
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="offset"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchUsers([FromQuery] string text, int offset, int count)
         {
-            return "value";
-        }
-
-        // POST api/<UserController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<UserController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            if (text is null || offset < 0 || count < 1 || count > 100)
+                return BadRequest();
+            return Ok(await userService.GetUsersRangeWithNameAsync(text, offset, count));
         }
     }
 }

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WorkoutTracking.Domain.Dto;
+using WorkoutTracking.Domain.Models;
 
 namespace WorkoutTracking.Domain.Services.Interfaces
 {
-    interface IEncryptionService
+    public interface IEncryptionService
     {
-        Task<PasswordDto> EncryptAsync(byte[] data);
+        Task<HashedPassword> EncryptAsync(byte[] data);
+        Task<HashedPassword> EncryptAsync(byte[] data, byte[] salt);
     }
 }

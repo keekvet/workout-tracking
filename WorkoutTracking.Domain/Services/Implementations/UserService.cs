@@ -1,10 +1,14 @@
-﻿using System;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WorkoutTracking.Data.Entities;
 using WorkoutTracking.Data.Repositories;
+using WorkoutTracking.Domain.Dto;
 using WorkoutTracking.Domain.Services.Interfaces;
 
 namespace WorkoutTracking.Domain.Services.Implementations
@@ -12,37 +16,46 @@ namespace WorkoutTracking.Domain.Services.Implementations
     public class UserService : IUserService
     {
         private readonly IRepository<User> userRepository;
+        private readonly IMapper mapper;
 
-        public UserService(IRepository<User> userRepository)
+        public UserService(IRepository<User> userRepository, IMapper mapper)
         {
             this.userRepository = userRepository;
-        }
-
-        public async Task<User> AddUserAsync(User user)
-        {
-            return await userRepository.AddAsync(user);
+            this.mapper = mapper;
         }
 
         public async Task<bool> DeleteUserAsync(User user)
         {
-            return await userRepository.DeleteAsync(user);
+            bool result = await userRepository.DeleteAsync(user);
+            await userRepository.SaveChangesAsync();
+            return result;
         }
 
-        public async Task<User> GetUserByIdAsync(int id)
+        public async Task<UserDto> GetUserByIdAsync(int id)
         {
-            return await userRepository.GetByIdAsync(id);
+            return mapper.Map<User, UserDto>(await userRepository.GetByIdAsync(id));
         }
 
-        public async Task<User> GetUserByNameAsync(string name)
+        public async Task<UserDto> GetUserByNameAsync(string name)
         {
-            if (name is null)
-                return null;
-            return await Task.Run(() => userRepository.Entities.Where(u => u.Name.Equals(name)).FirstOrDefault());
+            return mapper.Map<User, UserDto>(await GetUserEntityByNameAsync(name));
         }
 
-        public async Task<User> UpdateUserAsync(User user)
+        public async Task<ICollection<UserDto>> GetUsersRangeWithNameAsync(string text, int offset, int count)
         {
-            return await userRepository.UpdateAsync(user);
+            return await userRepository.Entities
+                .Where(u => u.Name.ToUpper().Contains(text.ToUpper()))
+                .Skip(offset)
+                .Take(count)
+                .Select(u => mapper.Map<User, UserDto>(u))
+                .ToListAsync();
+        }
+
+        public async Task<User> GetUserEntityByNameAsync(string name)
+        {
+            return await userRepository.Entities
+                .Where(u => u.Name.Equals(name))
+                .FirstOrDefaultAsync();
         }
     }
 }

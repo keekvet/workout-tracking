@@ -9,8 +9,8 @@ using WorkoutTracking.Domain.Models.User;
 
 namespace WorkoutTracking.Domain.Services.Interfaces
 {
-    public interface ILoginService
+    public interface IRegisterService
     {
-        Task<UserTokenDto> LoginAsync(UserLoginModel user);
+        Task<UserDto> Register(UserRegisterModel user);
     }
 }

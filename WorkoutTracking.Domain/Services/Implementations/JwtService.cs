@@ -36,7 +36,7 @@ namespace WorkoutTracking.Domain.Services.Implementations
             SigningCredentials credentials = 
                 new SigningCredentials(
                     new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfiguration.Key)),
-                    jwtConfiguration.Key, SecurityAlgorithms.HmacSha256);
+                    SecurityAlgorithms.HmacSha256);
 
             JwtSecurityToken token = new JwtSecurityToken(
                     jwtConfiguration.Issuer,

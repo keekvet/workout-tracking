@@ -18,5 +18,6 @@ namespace WorkoutTracking.Data.Repositories
         Task<bool> DeleteAsync(TEntity entity);
         Task AddRangeAsync(IEnumerable<TEntity> entity);
         Task DeleteRangeAsync(IEnumerable<TEntity> entity);
+        Task SaveChangesAsync();
     }
 }
