@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkoutTracking.Application.Models.Pagination.Base;
 
-namespace WorkoutTracking.Application.Models.User
+namespace WorkoutTracking.Application.Models.Pagination
 {
-    public class UserLoginModel
+    public class UserSearchModel : SortedPaginationModel
     {
         public string Name { get; set; }
-        public string Password { get; set; }
     }
 }

@@ -12,12 +12,15 @@ namespace WorkoutTracking.Data.Repositories
     {
         private readonly DbSet<TEntity> dbEntities;
         private readonly WorkoutContext context;
-
-        public DbSet<TEntity> Entities { get => dbEntities; }
         public Repository(WorkoutContext context)
         {
             this.context = context;
             dbEntities = context.Set<TEntity>();
+        }
+
+        public IQueryable<TEntity> GetAll()
+        {
+            return dbEntities.AsQueryable();
         }
         public async Task<TEntity> AddAsync(TEntity entity)
         {

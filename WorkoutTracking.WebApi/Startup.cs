@@ -17,7 +17,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Workout_tracking.ServiceExtention;
 using WorkoutTracking.Data.Context;
-using WorkoutTracking.Domain.ConfigurationTemplates;
+using WorkoutTracking.Application.ConfigurationTemplates;
+using FluentValidation.AspNetCore;
+using WorkoutTracking.Application.Validators;
 
 namespace WorkoutTracking
 {
@@ -33,7 +35,9 @@ namespace WorkoutTracking
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<UserLoginValidator>());
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WorkoutTracking", Version = "v1" });

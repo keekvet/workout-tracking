@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Data.Entities;
 
-namespace WorkoutTracking.Domain.Services.Interfaces
+namespace WorkoutTracking.Application.Services.Interfaces
 {
     public interface IFollowerService
     {

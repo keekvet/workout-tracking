@@ -10,8 +10,7 @@ namespace WorkoutTracking.Data.Repositories
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        DbSet<TEntity> Entities { get; }
-
+        IQueryable<TEntity> GetAll();
         Task<TEntity> GetByIdAsync(int id);
         Task<TEntity> AddAsync(TEntity entity);
         Task<TEntity> UpdateAsync(TEntity entity);

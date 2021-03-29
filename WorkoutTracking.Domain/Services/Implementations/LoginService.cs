@@ -6,12 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Data.Entities;
 using WorkoutTracking.Data.Repositories;
-using WorkoutTracking.Domain.Dto;
-using WorkoutTracking.Domain.Models;
-using WorkoutTracking.Domain.Models.User;
-using WorkoutTracking.Domain.Services.Interfaces;
+using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Models;
+using WorkoutTracking.Application.Models.User;
+using WorkoutTracking.Application.Services.Interfaces;
 
-namespace WorkoutTracking.Domain.Services.Implementations
+namespace WorkoutTracking.Application.Services.Implementations
 {
     public class LoginService : ILoginService
     {

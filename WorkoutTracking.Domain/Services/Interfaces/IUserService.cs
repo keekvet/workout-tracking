@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Data.Entities;
-using WorkoutTracking.Domain.Dto;
+using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Models;
+using WorkoutTracking.Application.Models.Pagination;
 
-namespace WorkoutTracking.Domain.Services.Interfaces
+namespace WorkoutTracking.Application.Services.Interfaces
 {
     public interface IUserService
     {
@@ -14,6 +16,6 @@ namespace WorkoutTracking.Domain.Services.Interfaces
         Task<UserDto> GetUserByIdAsync(int id);
         Task<UserDto> GetUserByNameAsync(string name);
         Task<User> GetUserEntityByNameAsync(string name);
-        Task<ICollection<UserDto>> GetUsersRangeWithNameAsync(string text, int offset, int count); 
+        Task<ICollection<UserDto>> GetUsersWithNameAsync(UserSearchModel model); 
     }
 }

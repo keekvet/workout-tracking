@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkoutTracking.Data", "WorkoutTracking.Data\WorkoutTracking.Data.csproj", "{F16FF465-596A-4377-A5BB-2463D038D5BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkoutTracking.Domain", "WorkoutTracking.Domain\WorkoutTracking.Domain.csproj", "{1C337C70-6AD3-4520-830C-9A9736AADA9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkoutTracking.Application", "WorkoutTracking.Domain\WorkoutTracking.Application.csproj", "{1C337C70-6AD3-4520-830C-9A9736AADA9C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkoutTracking.WebApi", "WorkoutTracking.WebApi\WorkoutTracking.WebApi.csproj", "{633230FF-3991-4E68-B7B7-3954FA4ADE0B}"
 EndProject

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WorkoutTracking.Domain.Models;
+using WorkoutTracking.Application.Models;
 
-namespace WorkoutTracking.Domain.Services.Interfaces
+namespace WorkoutTracking.Application.Services.Interfaces
 {
     public interface IEncryptionService
     {

@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Data.Entities;
-using WorkoutTracking.Domain.Models.User;
-using WorkoutTracking.Domain.Services.Interfaces;
+using WorkoutTracking.Application.Models.User;
+using WorkoutTracking.Application.Services.Interfaces;
 
 namespace Workout_tracking.Controllers
 {

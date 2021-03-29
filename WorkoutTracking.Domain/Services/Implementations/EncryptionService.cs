@@ -5,11 +5,11 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using WorkoutTracking.Domain.ConfigurationTemplates;
-using WorkoutTracking.Domain.Models;
-using WorkoutTracking.Domain.Services.Interfaces;
+using WorkoutTracking.Application.ConfigurationTemplates;
+using WorkoutTracking.Application.Models;
+using WorkoutTracking.Application.Services.Interfaces;
 
-namespace WorkoutTracking.Domain.Services.Implementations
+namespace WorkoutTracking.Application.Services.Implementations
 {
     public class EncryptionService : IEncryptionService
     {

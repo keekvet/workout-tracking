@@ -8,18 +8,25 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WorkoutTracking.Data.Entities;
 using WorkoutTracking.Data.Repositories;
-using WorkoutTracking.Domain.Dto;
-using WorkoutTracking.Domain.Services.Interfaces;
+using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Services.Interfaces;
+using WorkoutTracking.Application.Models;
+using WorkoutTracking.Application.Models.Pagination;
 
-namespace WorkoutTracking.Domain.Services.Implementations
+namespace WorkoutTracking.Application.Services.Implementations
 {
     public class UserService : IUserService
     {
+        private readonly IPaginationService<User, UserDto> paginationService;
         private readonly IRepository<User> userRepository;
         private readonly IMapper mapper;
 
-        public UserService(IRepository<User> userRepository, IMapper mapper)
+        public UserService(
+            IPaginationService<User, UserDto> paginationService,
+            IRepository<User> userRepository, 
+            IMapper mapper)
         {
+            this.paginationService = paginationService;
             this.userRepository = userRepository;
             this.mapper = mapper;
         }
@@ -41,19 +48,19 @@ namespace WorkoutTracking.Domain.Services.Implementations
             return mapper.Map<User, UserDto>(await GetUserEntityByNameAsync(name));
         }
 
-        public async Task<ICollection<UserDto>> GetUsersRangeWithNameAsync(string text, int offset, int count)
+        public async Task<ICollection<UserDto>> GetUsersWithNameAsync(UserSearchModel model)
         {
-            return await userRepository.Entities
-                .Where(u => u.Name.ToUpper().Contains(text.ToUpper()))
-                .Skip(offset)
-                .Take(count)
-                .Select(u => mapper.Map<User, UserDto>(u))
-                .ToListAsync();
+            Func<User, bool> filter = null;
+
+            if (model.Name is not null)
+                filter = u => u.Name.Contains(model.Name);
+
+            return await paginationService.GetRangeAsync(model, filter);
         }
 
         public async Task<User> GetUserEntityByNameAsync(string name)
         {
-            return await userRepository.Entities
+            return await userRepository.GetAll()
                 .Where(u => u.Name.Equals(name))
                 .FirstOrDefaultAsync();
         }

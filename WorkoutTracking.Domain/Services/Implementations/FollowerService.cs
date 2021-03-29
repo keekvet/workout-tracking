@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WorkoutTracking.Domain.Services.Implementations
+namespace WorkoutTracking.Application.Services.Implementations
 {
     public class FollowerService
     {

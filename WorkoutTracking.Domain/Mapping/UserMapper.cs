@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Data.Entities;
-using WorkoutTracking.Domain.Dto;
-using WorkoutTracking.Domain.Models;
-using WorkoutTracking.Domain.Models.User;
+using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Models;
+using WorkoutTracking.Application.Models.User;
 
-namespace WorkoutTracking.Domain.Mapping
+namespace WorkoutTracking.Application.Mapping
 {
     public class UserMapper : Profile
     {

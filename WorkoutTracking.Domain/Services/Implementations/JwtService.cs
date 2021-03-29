@@ -8,10 +8,10 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Data.Entities;
-using WorkoutTracking.Domain.ConfigurationTemplates;
-using WorkoutTracking.Domain.Services.Interfaces;
+using WorkoutTracking.Application.ConfigurationTemplates;
+using WorkoutTracking.Application.Services.Interfaces;
 
-namespace WorkoutTracking.Domain.Services.Implementations
+namespace WorkoutTracking.Application.Services.Implementations
 {
     public class JwtService : IJwtService
     {

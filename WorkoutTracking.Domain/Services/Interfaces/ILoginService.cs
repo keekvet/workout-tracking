@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Data.Entities;
-using WorkoutTracking.Domain.Dto;
-using WorkoutTracking.Domain.Models.User;
+using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Models.User;
 
-namespace WorkoutTracking.Domain.Services.Interfaces
+namespace WorkoutTracking.Application.Services.Interfaces
 {
     public interface ILoginService
     {

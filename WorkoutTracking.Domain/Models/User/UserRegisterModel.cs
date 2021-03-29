@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WorkoutTracking.Domain.Models.User
+namespace WorkoutTracking.Application.Models.User
 {
     public class UserRegisterModel
     {

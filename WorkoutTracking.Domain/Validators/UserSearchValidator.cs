@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WorkoutTracking.Application.Services.Interfaces
+namespace WorkoutTracking.Application.Validators
 {
-    public interface IPublicTrainingTemplateService
+    public class UserSearchValidator
     {
         
     }

@@ -8,9 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Data.Entities;
 using WorkoutTracking.Data.Repositories;
-using WorkoutTracking.Domain.ConfigurationTemplates;
-using WorkoutTracking.Domain.Services.Implementations;
-using WorkoutTracking.Domain.Services.Interfaces;
+using WorkoutTracking.Application.ConfigurationTemplates;
+using WorkoutTracking.Application.Services.Implementations;
+using WorkoutTracking.Application.Services.Interfaces;
+using WorkoutTracking.Application.Dto;
 
 namespace Workout_tracking.ServiceExtention
 {
@@ -23,6 +24,8 @@ namespace Workout_tracking.ServiceExtention
             services.AddScoped<IEncryptionService, EncryptionService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IJwtService, JwtService>();
+
+            services.AddScoped<IPaginationService<User, UserDto>, PaginationService<User, UserDto>>();
             
             services.AddScoped<IRepository<User>, Repository<User>>();
             return services;

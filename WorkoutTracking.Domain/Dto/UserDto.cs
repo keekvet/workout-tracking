@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WorkoutTracking.Data.Entities;
 using WorkoutTracking.Data.Enums;
 
-namespace WorkoutTracking.Domain.Dto
+namespace WorkoutTracking.Application.Dto
 {
     public class UserDto
     {
