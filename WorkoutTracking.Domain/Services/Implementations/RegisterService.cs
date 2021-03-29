@@ -39,38 +39,10 @@ namespace WorkoutTracking.Application.Services.Implementations
 
         public async Task<UserDto> Register(UserRegisterModel userModel)
         {
-            if (userModel is null)
-                return null;
-
-            #region credentials validation
-            if (!userModel.Password.Equals(userModel.PasswordConfirmation))
-                throw new InvalidCredentialException("mistake in password");
-
-            if (userModel.Password.Equals(userModel.Name))
-                throw new InvalidCredentialException("user name and password are equal");
-
-            if (!Regex.IsMatch(userModel.Name, @"^\w{4,20}$"))
-                throw new InvalidCredentialException("user name is too short or contains wrong symbols");
-
-            string digit = @"\d+";
-            string lowerCase = @"[a-z]+";
-            string upperCase = @"[A-Z]+";
-            string whiteSpaces = @"^\w{8, 20}$";
-
-            if (!(
-                Regex.IsMatch(userModel.Password, digit)
-                && Regex.IsMatch(userModel.Password, lowerCase)
-                && Regex.IsMatch(userModel.Password, upperCase)
-                && Regex.IsMatch(userModel.Password, whiteSpaces)))
-                throw new InvalidCredentialException("password must be at least 8 characters, " +
-                    "no more than 20 characters, and must include at least one upper case letter, " +
-                    "one lower case letter, and one numeric digit.");
-
             UserDto foundUser = await userService.GetUserByNameAsync(userModel.Name);
 
             if (foundUser is not null)
                 throw new InvalidCredentialException("User with this name already exist");
-            #endregion
 
             HashedPassword passwordHash = await encryptionService.EncryptAsync(
                Encoding.UTF8.GetBytes(userModel.Password));

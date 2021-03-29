@@ -12,7 +12,7 @@ using WorkoutTracking.Application.Models.Pagination;
 
 namespace Workout_tracking.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("api/users")]
     public class UserController : ControllerBase

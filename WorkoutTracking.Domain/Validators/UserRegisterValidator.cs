@@ -15,14 +15,17 @@ namespace WorkoutTracking.Application.Validators
             string digit = @"\d+";
             string lowerCase = @"[a-z]+";
             string upperCase = @"[A-Z]+";
-            string whiteSpaces = @"^\w{8, 20}$";
+            string whiteSpaces = @"^\w*$";
 
             RuleFor(u => u.Name)
                 .NotNull()
                 .NotEqual(u => u.Password)
                 .Length(4, 20)
                 .Matches(@"^\w{4,20}$");
-    
+
+            RuleFor(u => u.PasswordConfirmation)
+                .NotNull();
+
             RuleFor(u => u.Password)
                 .NotNull()
                 .Equal(u => u.PasswordConfirmation)

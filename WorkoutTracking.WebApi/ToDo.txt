@@ -1,6 +1,4 @@
 ﻿1. add isRequired and on delete to entities +
 2. add friend request list to entities +
 3. add user password and encryption +
-4. restrict user name size, password
-5. create validators
-6. create DTOs
+4. restrict user name size, password +

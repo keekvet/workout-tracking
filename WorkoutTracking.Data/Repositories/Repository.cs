@@ -20,7 +20,7 @@ namespace WorkoutTracking.Data.Repositories
 
         public IQueryable<TEntity> GetAll()
         {
-            return dbEntities.AsQueryable();
+            return context.Set<TEntity>();
         }
         public async Task<TEntity> AddAsync(TEntity entity)
         {

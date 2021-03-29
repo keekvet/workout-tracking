@@ -12,6 +12,7 @@ using WorkoutTracking.Application.Dto;
 using WorkoutTracking.Application.Services.Interfaces;
 using WorkoutTracking.Application.Models;
 using WorkoutTracking.Application.Models.Pagination;
+using System.Linq.Expressions;
 
 namespace WorkoutTracking.Application.Services.Implementations
 {
@@ -50,10 +51,10 @@ namespace WorkoutTracking.Application.Services.Implementations
 
         public async Task<ICollection<UserDto>> GetUsersWithNameAsync(UserSearchModel model)
         {
-            Func<User, bool> filter = null;
+            Expression<Func<User, bool>> filter = null;
 
             if (model.Name is not null)
-                filter = u => u.Name.Contains(model.Name);
+                filter = u => u.Name.ToUpper().Contains(model.Name.ToUpper());
 
             return await paginationService.GetRangeAsync(model, filter);
         }
