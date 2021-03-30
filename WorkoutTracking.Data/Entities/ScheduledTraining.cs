@@ -12,6 +12,6 @@ namespace WorkoutTracking.Data.Entities
         public string Note { get; set; }
         public DayOfWeek Day { get; set; }
         public TimeSpan StartTime { get; set; }
-        public TrainingTemplate Template { get; set; }
+        public virtual TrainingTemplate Template { get; set; }
     }
 }

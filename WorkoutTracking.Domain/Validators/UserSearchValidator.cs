@@ -8,7 +8,7 @@ using WorkoutTracking.Application.Models.Pagination;
 
 namespace WorkoutTracking.Application.Validators
 {
-    public class UserSearchValidator : SortedPagingationValidator<UserSearchModel>
+    public class UserSearchValidator : SortedPaginationValidator<UserSearchModel>
     {
         public UserSearchValidator(){}
     }

@@ -13,12 +13,13 @@ namespace WorkoutTracking.Application.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<bool> DeleteUserAsync(User user);
+        Task<bool> DeleteUserAsync(int userId);
         Task<UserDto> GetUserByIdAsync(int id);
         Task<UserDto> GetUserByNameAsync(string name);
+        Task<User> GetUserEntityByIdAsync(int id);
         Task<User> GetUserEntityByNameAsync(string name);
         Task<ICollection<UserDto>> GetUsersWithNameAsync(UserSearchModel model);
-        Task<UserDto> UpdateUser(UserUpdateModel userUpdateModel, int userId);
-        Task<bool?> UpdatePassword(PasswordUpdateModel updatePasswordModel, int userId);
+        Task<UserDto> UpdateUserAsync(UserUpdateModel userUpdateModel, int userId);
+        Task<bool?> UpdatePasswordAsync(PasswordUpdateModel updatePasswordModel, int userId);
     }
 }

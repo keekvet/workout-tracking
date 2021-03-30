@@ -12,6 +12,6 @@ namespace WorkoutTracking.Data.Entities
         public bool IsContinious { get; set; }
         public int Duration { get; set; }
         public int Weigth { get; set; }
-        public Exercise Exercise { get; set; }
+        public virtual Exercise Exercise { get; set; }
     }
 }

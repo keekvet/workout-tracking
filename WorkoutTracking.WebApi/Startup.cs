@@ -36,8 +36,10 @@ namespace WorkoutTracking
         {
 
             services.AddControllers()
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<UserLoginValidator>());
-            
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<UserLoginValidator>())
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore );
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WorkoutTracking", Version = "v1" });
@@ -53,9 +55,9 @@ namespace WorkoutTracking
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
-                    JwtConfiguration jwtConfiguration = 
+                    JwtConfiguration jwtConfiguration =
                         Configuration.GetSection(nameof(JwtConfiguration)).Get<JwtConfiguration>();
-                    
+
                     options.RequireHttpsMetadata = true;
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
@@ -73,7 +75,7 @@ namespace WorkoutTracking
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

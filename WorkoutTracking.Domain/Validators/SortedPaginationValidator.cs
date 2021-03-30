@@ -8,8 +8,8 @@ using WorkoutTracking.Application.Models.Pagination.Base;
 
 namespace WorkoutTracking.Application.Validators
 {
-    public class SortedPagingationValidator<T> : PaginationValidator<T> where T : SortedPaginationModel
+    public class SortedPaginationValidator<T> : PaginationValidator<T> where T : SortedPaginationModel
     {
-        public SortedPagingationValidator(){}
+        public SortedPaginationValidator(){}
     }
 }

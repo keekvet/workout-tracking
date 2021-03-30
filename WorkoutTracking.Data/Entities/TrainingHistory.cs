@@ -11,7 +11,7 @@ namespace WorkoutTracking.Data.Entities
         public int Id { get; set; }
         public string Note { get; set; }
         public DateTime Start { get; set; }
-        public User User { get; set; }
-        public ICollection<ExerciseHistory> ExerciseHistory{ get; set; }
+        public virtual User User { get; set; }
+        public virtual ICollection<ExerciseHistory> ExerciseHistory{ get; set; } = new List<ExerciseHistory>();
     }
 }

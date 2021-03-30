@@ -17,14 +17,16 @@ namespace Workout_tracking.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/users")]
+    [Route("api/user")]
     public class UserController : ControllerBase
     {
         private readonly IUserService userService;
+        private readonly IUserResolverService userResolverService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IUserResolverService userResolverService)
         {
             this.userService = userService;
+            this.userResolverService = userResolverService;
         }
 
 
@@ -35,24 +37,27 @@ namespace Workout_tracking.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<IActionResult> SearchUsers([FromQuery] UserSearchModel userSearchModel)
+        public async Task<IActionResult> SearchUsersAsync([FromQuery] UserSearchModel userSearchModel)
         {
             return Ok(await userService.GetUsersWithNameAsync(userSearchModel));
         }
 
         [HttpPut("update")]
-        public async Task<IActionResult> UpdateUser([FromBody] UserUpdateModel userUpdateModel)
+        public async Task<IActionResult> UpdateUserAsync([FromBody] UserUpdateModel userUpdateModel)
         {
-            return Ok(await userService.UpdateUser(userUpdateModel,
-                int.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier))));
+            return Ok(await userService.UpdateUserAsync(userUpdateModel, userResolverService.GetUserId()));
         }
 
         [HttpPut("update/password")]
-        public async Task<IActionResult> UpdateUserPassword([FromBody] PasswordUpdateModel updatePasswordModel)
+        public async Task<IActionResult> UpdateUserPasswordAsync([FromBody] PasswordUpdateModel updatePasswordModel)
         {
-            return Ok(await userService.UpdatePassword(
-                updatePasswordModel,
-               int.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier))));
+            return Ok(await userService.UpdatePasswordAsync(updatePasswordModel, userResolverService.GetUserId()));
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteUserAsync()
+        {
+            return Ok(await userService.DeleteUserAsync(userResolverService.GetUserId()));
         }
     }
 }

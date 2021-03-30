@@ -24,6 +24,8 @@ namespace Workout_tracking.ServiceExtention
             services.AddScoped<IEncryptionService, EncryptionService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<IUserResolverService, UserResolverService>();
+            services.AddScoped<IFollowingService, FollowingService>();
 
             services.AddScoped<IPaginationService<User, UserDto>, PaginationService<User, UserDto>>();
             

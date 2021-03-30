@@ -17,6 +17,7 @@ namespace WorkoutTracking.Application.Mapping
         {
             CreateMap<UserLoginModel, User>();
             CreateMap<UserRegisterModel, User>();
+
             CreateMap<User, UserDto>();
             CreateMap<User, UserTokenDto>();
         }

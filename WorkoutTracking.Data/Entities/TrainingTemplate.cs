@@ -11,10 +11,10 @@ namespace WorkoutTracking.Data.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public User Creator { get; set; }
-        public TrainingCategory Category { get; set; }
-        public PublicTrainingTemplate publicTraining { get; set; }
-        public ICollection<Exercise> Exercises { get; set; }
-        public ICollection<ScheduledTraining> ScheduledTrainings { get; set; }
+        public virtual User Creator { get; set; }
+        public virtual TrainingCategory Category { get; set; }
+        public virtual PublicTrainingTemplate publicTraining { get; set; }
+        public virtual ICollection<Exercise> Exercises { get; set; } = new List<Exercise>();
+        public virtual ICollection<ScheduledTraining> ScheduledTrainings { get; set; } = new List<ScheduledTraining>();
     }
 }

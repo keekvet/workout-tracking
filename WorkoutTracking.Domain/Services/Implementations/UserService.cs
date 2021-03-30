@@ -37,9 +37,9 @@ namespace WorkoutTracking.Application.Services.Implementations
             this.mapper = mapper;
         }
 
-        public async Task<bool> DeleteUserAsync(User user)
+        public async Task<bool> DeleteUserAsync(int userId)
         {
-            bool result = await userRepository.DeleteAsync(user);
+            bool result = await userRepository.DeleteAsync(await userRepository.GetByIdAsync(userId));
             await userRepository.SaveChangesAsync();
             return result;
         }
@@ -71,7 +71,12 @@ namespace WorkoutTracking.Application.Services.Implementations
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<UserDto> UpdateUser(UserUpdateModel userUpdateModel, int userId)
+        public async Task<User> GetUserEntityByIdAsync(int Id)
+        {
+            return await userRepository.GetByIdAsync(Id);
+        }
+
+        public async Task<UserDto> UpdateUserAsync(UserUpdateModel userUpdateModel, int userId)
         {
             User user = await userRepository.GetByIdAsync(userId);
 
@@ -91,7 +96,7 @@ namespace WorkoutTracking.Application.Services.Implementations
             return dto;
 
         }
-        public async Task<bool?> UpdatePassword(PasswordUpdateModel updatePasswordModel, int userId)
+        public async Task<bool?> UpdatePasswordAsync(PasswordUpdateModel updatePasswordModel, int userId)
         {
             User user = await userRepository.GetByIdAsync(userId);
 
