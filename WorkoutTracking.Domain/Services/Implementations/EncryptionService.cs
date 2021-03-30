@@ -28,6 +28,9 @@ namespace WorkoutTracking.Application.Services.Implementations
 
         public async Task<HashedPassword> EncryptAsync(byte[] data, byte[] salt)
         {
+            if (data is null || salt is null)
+                return null;
+
             return await Task.Run(() =>
             {
                 byte[] pepperedData = data.Zip(pepper, (d, s) => (byte)(d + s)).ToArray();
@@ -44,6 +47,17 @@ namespace WorkoutTracking.Application.Services.Implementations
             provider.GetBytes(salt);
 
             return await EncryptAsync(data, salt);
+        }
+
+        public async Task<bool> PasswordEqualsHash(string password, byte[] hash, byte[] salt)
+        {
+            HashedPassword hashedPassword = await EncryptAsync(
+                   Encoding.UTF8.GetBytes(password), salt);
+
+            if (Enumerable.SequenceEqual(hash, hashedPassword.Hash))
+                return true;
+
+            return false;
         }
     }
 }

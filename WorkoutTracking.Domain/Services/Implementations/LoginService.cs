@@ -10,6 +10,7 @@ using WorkoutTracking.Application.Dto;
 using WorkoutTracking.Application.Models;
 using WorkoutTracking.Application.Models.User;
 using WorkoutTracking.Application.Services.Interfaces;
+using System.Security.Authentication;
 
 namespace WorkoutTracking.Application.Services.Implementations
 {
@@ -32,20 +33,19 @@ namespace WorkoutTracking.Application.Services.Implementations
             this.encryptionService = encryptionService;
         }
 
+
+
         public async Task<UserTokenDto> LoginAsync(UserLoginModel user)
         {
             User foundUser = await userService.GetUserEntityByNameAsync(user.Name);
 
-            if (foundUser is not null)
+            if (foundUser is null ||
+                !await encryptionService.PasswordEqualsHash(user.Password, foundUser.PasswordHash, foundUser.Salt))
             {
-
-                HashedPassword loginUserHash = await encryptionService.EncryptAsync(
-                    Encoding.UTF8.GetBytes(user.Password),
-                    foundUser.Salt);
-
-                if (Enumerable.SequenceEqual(foundUser.PasswordHash, loginUserHash.Hash))
-                    foundUser.Jwt = jwtService.GenerateToken(foundUser);
+                throw new InvalidCredentialException("user name or password incorrect");
             }
+
+            foundUser.Jwt = jwtService.GenerateToken(foundUser);
 
             return mapper.Map<User, UserTokenDto>(foundUser);
         }

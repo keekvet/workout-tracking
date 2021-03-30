@@ -22,7 +22,6 @@ namespace WorkoutTracking.Data.EntitiesConfigurations
             builder.Property(u => u.About).HasMaxLength(1000);
 
             builder.Ignore(u => u.Jwt);
-            builder.Ignore(u => u.Password);
 
             builder
                 .HasMany(u => u.PublicTrainingTemplates)

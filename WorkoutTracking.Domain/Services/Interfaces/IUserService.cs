@@ -7,6 +7,7 @@ using WorkoutTracking.Data.Entities;
 using WorkoutTracking.Application.Dto;
 using WorkoutTracking.Application.Models;
 using WorkoutTracking.Application.Models.Pagination;
+using WorkoutTracking.Application.Models.User;
 
 namespace WorkoutTracking.Application.Services.Interfaces
 {
@@ -16,6 +17,8 @@ namespace WorkoutTracking.Application.Services.Interfaces
         Task<UserDto> GetUserByIdAsync(int id);
         Task<UserDto> GetUserByNameAsync(string name);
         Task<User> GetUserEntityByNameAsync(string name);
-        Task<ICollection<UserDto>> GetUsersWithNameAsync(UserSearchModel model); 
+        Task<ICollection<UserDto>> GetUsersWithNameAsync(UserSearchModel model);
+        Task<UserDto> UpdateUser(UserUpdateModel userUpdateModel, int userId);
+        Task<bool?> UpdatePassword(PasswordUpdateModel updatePasswordModel, int userId);
     }
 }

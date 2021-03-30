@@ -14,7 +14,6 @@ namespace WorkoutTracking.Application.Validators
         {
             RuleFor(p => p.Offset).NotNull().GreaterThanOrEqualTo(0);
             RuleFor(p => p.Count).NotNull().GreaterThanOrEqualTo(1).LessThan(100);
-            
         }
     }
 }

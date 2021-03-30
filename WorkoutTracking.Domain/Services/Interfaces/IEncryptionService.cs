@@ -11,5 +11,6 @@ namespace WorkoutTracking.Application.Services.Interfaces
     {
         Task<HashedPassword> EncryptAsync(byte[] data);
         Task<HashedPassword> EncryptAsync(byte[] data, byte[] salt);
+        Task<bool> PasswordEqualsHash(string password, byte[] hash, byte[] salt);
     }
 }

@@ -9,17 +9,16 @@ using WorkoutTracking.Application.ValidationExtentions;
 
 namespace WorkoutTracking.Application.Validators
 {
-    public class UserRegisterValidator : AbstractValidator<UserRegisterModel>
+    public class PasswordUpdateValidator : AbstractValidator<PasswordUpdateModel>
     {
-        public UserRegisterValidator()
+        public PasswordUpdateValidator()
         {
-            RuleFor(u => u.Name)
-                .UserNameTemplate()
-                .NotEqual(u => u.Password);
-            
-            RuleFor(u => u.Password)
+            RuleFor(p => p.CurrentPassword)
+                .NotNull();
+
+            RuleFor(p => p.NewPassword)
                 .PasswordTemplate()
-                .Equal(u => u.PasswordConfirmation);
+                .Equal(p => p.ConfirmNewPassword);
         }
     }
 }
