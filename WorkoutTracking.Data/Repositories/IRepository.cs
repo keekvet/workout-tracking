@@ -11,6 +11,7 @@ namespace WorkoutTracking.Data.Repositories
     {
         IQueryable<TEntity> GetAll();
         Task<TEntity> GetByIdAsync(int id);
+        Task<TEntity> GetByIdAsync(int id, int secondId);
         Task<TEntity> AddAsync(TEntity entity);
         Task<TEntity> UpdateAsync(TEntity entity);
         Task<bool> DeleteAsync(TEntity entity);

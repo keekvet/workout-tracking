@@ -12,9 +12,9 @@ namespace WorkoutTracking.Application.Services.Interfaces
 {
     public interface IFollowingService
     {
-        Task<ICollection<UserDto>> AddFollowingAsync(FollowingPaginationModel model, int userId);
-        Task<ICollection<UserDto>> RemoveFollowingAsync(FollowingPaginationModel model, int userId);
-        Task<ICollection<UserDto>> GetFollowingAsync(FollowingPaginationModel model);
-        Task<ICollection<UserDto>> GetFollowersAsync(FollowingPaginationModel model);
+        Task<bool> AddFollowingAsync(int userToFollow, int userId);
+        Task<bool> RemoveFollowingAsync(int userToUnfollow, int userId);
+        Task<IEnumerable<UserDto>> GetFollowingAsync(FollowingPaginationModel model);
+        Task<IEnumerable<UserDto>> GetFollowersAsync(FollowingPaginationModel model);
     }
 }

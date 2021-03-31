@@ -54,12 +54,12 @@ namespace WorkoutTracking.Application.Services.Implementations
             return mapper.Map<User, UserDto>(await GetUserEntityByNameAsync(name));
         }
 
-        public async Task<ICollection<UserDto>> GetUsersWithNameAsync(UserSearchModel model)
+        public async Task<IEnumerable<UserDto>> GetUsersWithNameAsync(UserSearchPaginationModel model)
         {
             Expression<Func<User, bool>> filter = null;
 
-            if (model.Name is not null)
-                filter = u => u.Name.ToUpper().Contains(model.Name.ToUpper());
+            if (model.SearchWithName is not null)
+                filter = u => u.Name.ToUpper().Contains(model.SearchWithName.ToUpper());
 
             return await paginationService.GetRangeAsync(model, filter);
         }
@@ -96,12 +96,12 @@ namespace WorkoutTracking.Application.Services.Implementations
             return dto;
 
         }
-        public async Task<bool?> UpdatePasswordAsync(PasswordUpdateModel updatePasswordModel, int userId)
+        public async Task<bool> UpdatePasswordAsync(PasswordUpdateModel updatePasswordModel, int userId)
         {
             User user = await userRepository.GetByIdAsync(userId);
 
             if (user is null)
-                return null;
+                return false;
 
             HashedPassword currentHashedPassword = await encryptionService.EncryptAsync(
                 Encoding.UTF8.GetBytes(updatePasswordModel.CurrentPassword),

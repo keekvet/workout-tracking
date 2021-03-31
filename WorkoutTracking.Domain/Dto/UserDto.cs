@@ -10,6 +10,7 @@ namespace WorkoutTracking.Application.Dto
 {
     public class UserDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string About { get; set; }
         public UserAccess Access { get; set; }

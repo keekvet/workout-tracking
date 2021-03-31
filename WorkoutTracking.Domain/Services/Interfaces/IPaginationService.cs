@@ -12,8 +12,9 @@ namespace WorkoutTracking.Application.Services.Interfaces
 {
     public interface IPaginationService<TEntity, TDto>
     {
-        Task<ICollection<TDto>> GetRangeAsync(
+        Task<IEnumerable<TDto>> GetRangeAsync(
             SortedPaginationModel model, 
             Expression<Func<TEntity, bool>> filter = null);
+        IEnumerable<TDto> MakePage(SortedPaginationModel model, IEnumerable<TEntity> source);
     }
 }

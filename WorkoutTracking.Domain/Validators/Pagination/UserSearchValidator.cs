@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Application.Models.Pagination;
 
-namespace WorkoutTracking.Application.Validators
+namespace WorkoutTracking.Application.Validators.Pagination
 {
-    public class UserSearchValidator : SortedPaginationValidator<UserSearchModel>
+    public class UserSearchValidator : SortedPaginationValidator<UserSearchPaginationModel>
     {
         public UserSearchValidator(){}
     }

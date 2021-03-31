@@ -28,15 +28,23 @@ namespace Workout_tracking.Controllers
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddFollowingAsync([FromBody] FollowingPaginationModel model)
+        public async Task<IActionResult> AddFollowingAsync([FromBody] int userToFollow)
         {
-            return Ok(await followingService.AddFollowingAsync(model, userResolverService.GetUserId()));
+            bool result = await followingService.AddFollowingAsync(userToFollow, userResolverService.GetUserId());
+
+            if(result)
+                return Ok();
+            return BadRequest();
         }
 
-        [HttpPost("remove")]
-        public async Task<IActionResult> RemoveFollowingAsync([FromBody] FollowingPaginationModel model)
+        [HttpDelete("remove")]
+        public async Task<IActionResult> RemoveFollowingAsync([FromBody] int userToUnfollow)
         {
-            return Ok(await followingService.RemoveFollowingAsync(model, userResolverService.GetUserId()));
+            bool result = await followingService.RemoveFollowingAsync(userToUnfollow, userResolverService.GetUserId());
+            
+            if(result)
+                return Ok();
+            return BadRequest();
         }
 
         [HttpGet("following")]

@@ -18,8 +18,8 @@ namespace WorkoutTracking.Application.Services.Interfaces
         Task<UserDto> GetUserByNameAsync(string name);
         Task<User> GetUserEntityByIdAsync(int id);
         Task<User> GetUserEntityByNameAsync(string name);
-        Task<ICollection<UserDto>> GetUsersWithNameAsync(UserSearchModel model);
+        Task<IEnumerable<UserDto>> GetUsersWithNameAsync(UserSearchPaginationModel model);
         Task<UserDto> UpdateUserAsync(UserUpdateModel userUpdateModel, int userId);
-        Task<bool?> UpdatePasswordAsync(PasswordUpdateModel updatePasswordModel, int userId);
+        Task<bool> UpdatePasswordAsync(PasswordUpdateModel updatePasswordModel, int userId);
     }
 }

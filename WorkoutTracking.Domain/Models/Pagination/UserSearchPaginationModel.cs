@@ -7,8 +7,8 @@ using WorkoutTracking.Application.Models.Pagination.Base;
 
 namespace WorkoutTracking.Application.Models.Pagination
 {
-    public class FollowingPaginationModel : SortedPaginationModel
+    public class UserSearchPaginationModel : SortedPaginationModel
     {
-        public int UserId { get; set; }
+        public string SearchWithName { get; set; }
     }
 }

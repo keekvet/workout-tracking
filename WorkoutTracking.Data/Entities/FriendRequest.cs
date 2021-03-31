@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkoutTracking.Data.Enums;
 
 namespace WorkoutTracking.Data.Entities
 {
@@ -12,6 +13,6 @@ namespace WorkoutTracking.Data.Entities
         public virtual User RequestFrom { get; set; }
         public int RequestToId { get; set; }
         public virtual User RequestTo { get; set; }
-        public bool IsRefused { get; set; }
+        public FriendRequestState State{ get; set; }
     }
 }

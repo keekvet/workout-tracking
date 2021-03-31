@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Application.Models.Pagination.Base;
 
-namespace WorkoutTracking.Application.Validators
+namespace WorkoutTracking.Application.Validators.Pagination
 {
     public class SortedPaginationValidator<T> : PaginationValidator<T> where T : SortedPaginationModel
     {

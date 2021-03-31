@@ -19,6 +19,7 @@ namespace Workout_tracking.ServiceExtention
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
+            #region services
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IRegisterService, RegisterService>();
             services.AddScoped<IEncryptionService, EncryptionService>();
@@ -26,10 +27,24 @@ namespace Workout_tracking.ServiceExtention
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IUserResolverService, UserResolverService>();
             services.AddScoped<IFollowingService, FollowingService>();
-
-            services.AddScoped<IPaginationService<User, UserDto>, PaginationService<User, UserDto>>();
+            services.AddScoped<IFriendService, FriendService>();
+            services.AddScoped<IFriendRequestService, FriendRequestService>();
+            #endregion
             
+            #region pagiantion services
+            services.AddScoped<
+                IPaginationService<User, UserDto>, 
+                PaginationService<User, UserDto>>();
+            services.AddScoped<
+                IPaginationService<FriendRequest, FriendRequestDto>, 
+                PaginationService<FriendRequest, FriendRequestDto>>();
+            #endregion
+
+            #region repositories
             services.AddScoped<IRepository<User>, Repository<User>>();
+            services.AddScoped<IRepository<FriendRequest>, Repository<FriendRequest>>();
+            #endregion
+
             return services;
         }
 

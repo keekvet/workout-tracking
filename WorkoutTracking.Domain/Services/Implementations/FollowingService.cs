@@ -17,60 +17,62 @@ namespace WorkoutTracking.Application.Services.Implementations
     public class FollowingService : IFollowingService
     {
         IMapper mapper;
-        IUserService userService;
-        IRepository<User> userRepository;
-        IPaginationService<User, UserDto> paginationService;
+        IFriendService friendService;
+        private readonly IUserService userService;
+        private readonly IRepository<User> userRepository;
+        private readonly IPaginationService<User, UserDto> paginationService;
 
         public FollowingService(
             IPaginationService<User, UserDto> paginationService,
             IRepository<User> userRepository,
+            IFriendService friendService,
             IUserService userService, 
             IMapper mapper)
         {
             this.mapper = mapper;
             this.userService = userService;
+            this.friendService = friendService;
             this.userRepository = userRepository;
             this.paginationService = paginationService;
         }
 
-        public async Task<ICollection<UserDto>> AddFollowingAsync(FollowingPaginationModel model, int userId)
+        public async Task<bool> AddFollowingAsync(int userToFollowId, int userId)
         {
             User user = await userService.GetUserEntityByIdAsync(userId);
-            User userToFollow = await userService.GetUserEntityByNameAsync(model.UserName);
+            User userToFollow = await userService.GetUserEntityByIdAsync(userToFollowId);
 
-            if (user is null || userToFollow is null || user.Following.Contains(userToFollow))
-                return null;
+            if (user is null 
+                || userToFollow is null 
+                || user.Following.Contains(userToFollow) 
+                || (await friendService.GetFriendsById(userId)).Where(u => u.Id.Equals(userToFollowId)).Any())
+                return false;
 
             user.Following.Add(userToFollow);
             await userRepository.UpdateAsync(user);
             await userRepository.SaveChangesAsync();
 
-            Expression<Func<User, bool>> filter = u => user.Following.Contains(u);
-
-            return await paginationService.GetRangeAsync(model, filter);
+            return true;
         }
 
-        public async Task<ICollection<UserDto>> RemoveFollowingAsync(FollowingPaginationModel model, int userId)
+        public async Task<bool> RemoveFollowingAsync(int userToUnfollow, int userId)
         {
             User user = await userService.GetUserEntityByIdAsync(userId);
 
             if (user is null)
-                return null;
+                return false;
 
-            User userToRemove = user.Following.Where(u => u.Name.Equals(model.UserName)).FirstOrDefault();
+            User userToRemove = user.Following.Where(u => u.Id.Equals(userToUnfollow)).FirstOrDefault();
             user.Following.Remove(userToRemove);
 
             await userRepository.UpdateAsync(user);
             await userRepository.SaveChangesAsync();
 
-            Expression<Func<User, bool>> filter = u => user.Following.Contains(u);
-
-            return await paginationService.GetRangeAsync(model, filter);
+            return true;
         }
 
-        public async Task<ICollection<UserDto>> GetFollowingAsync(FollowingPaginationModel model)
+        public async Task<IEnumerable<UserDto>> GetFollowingAsync(FollowingPaginationModel model)
         {
-            User user = await userService.GetUserEntityByNameAsync(model.UserName);
+            User user = await userService.GetUserEntityByIdAsync(model.UserId);
 
             if (user is null)
                 return null;
@@ -80,9 +82,9 @@ namespace WorkoutTracking.Application.Services.Implementations
             return await paginationService.GetRangeAsync(model, filter);
         }
 
-        public async Task<ICollection<UserDto>> GetFollowersAsync(FollowingPaginationModel model)
+        public async Task<IEnumerable<UserDto>> GetFollowersAsync(FollowingPaginationModel model)
         {
-            User user = await userService.GetUserEntityByNameAsync(model.UserName);
+            User user = await userService.GetUserEntityByIdAsync(model.UserId);
 
             if (user is null)
                 return null;

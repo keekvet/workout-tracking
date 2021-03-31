@@ -3,4 +3,7 @@
 3. add user password and encryption +
 4. restrict user name size, password +
 
-5. check update users when name changed
+5. check update users when name changed - (removed)
+
+6. add friend controller
+7. notate all method in controllers as "paged" or "paginated"

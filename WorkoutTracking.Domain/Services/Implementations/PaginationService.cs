@@ -25,7 +25,7 @@ namespace WorkoutTracking.Application.Services.Implementations
             this.mapper = mapper;
         }
 
-        public async Task<ICollection<TDto>> GetRangeAsync(
+        public async Task<IEnumerable<TDto>> GetRangeAsync(
             SortedPaginationModel model,
             Expression<Func<TEntity, bool>> filter)
         {
@@ -37,8 +37,8 @@ namespace WorkoutTracking.Application.Services.Implementations
             if (model.PropertyToSort is not null)
             {
                 Type type = typeof(TEntity);
-                
-                PropertyDescriptor sortProperty = 
+
+                PropertyDescriptor sortProperty =
                     TypeDescriptor.GetProperties(typeof(TEntity)).Find(model.PropertyToSort, true);
 
                 if (sortProperty is not null)
@@ -46,7 +46,9 @@ namespace WorkoutTracking.Application.Services.Implementations
                     ParameterExpression paramExpr = Expression.Parameter(type);
 
                     Expression<Func<TEntity, object>> expression = Expression.Lambda<Func<TEntity, object>>(
-                        Expression.Convert(Expression.Property(paramExpr, sortProperty.Name), typeof(object)), paramExpr);
+                        Expression.Convert(
+                            Expression.Property(paramExpr, sortProperty.Name),
+                            typeof(object)), paramExpr);
 
                     query = model.SortByAscending ?
                         query.OrderBy(expression) :
@@ -59,6 +61,29 @@ namespace WorkoutTracking.Application.Services.Implementations
                 .Take(model.Count.Value)
                 .Select(e => mapper.Map<TEntity, TDto>(e))
                 .ToListAsync();
+        }
+
+        public IEnumerable<TDto> MakePage(
+            SortedPaginationModel model,
+            IEnumerable<TEntity> source)
+        {
+            if (model.PropertyToSort is not null)
+            {
+                PropertyDescriptor sortProperty =
+                    TypeDescriptor.GetProperties(typeof(TEntity)).Find(model.PropertyToSort, true);
+
+                if (sortProperty is null)
+                    return null;
+
+                source = model.SortByAscending ?
+                    source.OrderBy(x => sortProperty) :
+                    source.OrderByDescending(x => sortProperty);
+            }
+
+            return source
+            .Skip(model.Offset.Value)
+            .Take(model.Count.Value)
+            .Select(e => mapper.Map<TEntity, TDto>(e));
         }
     }
 }

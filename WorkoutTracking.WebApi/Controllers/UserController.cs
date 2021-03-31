@@ -12,6 +12,7 @@ using WorkoutTracking.Application.Models.Pagination;
 using WorkoutTracking.Application.Models.User;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using WorkoutTracking.Application.Dto;
 
 namespace Workout_tracking.Controllers
 {
@@ -36,8 +37,14 @@ namespace Workout_tracking.Controllers
             return Ok(await userService.GetUserByNameAsync(name));
         }
 
+        [HttpGet("id/{id}")]
+        public async Task<IActionResult> GetUserByNameAsync(int id)
+        {
+            return Ok(await userService.GetUserByIdAsync(id));
+        }
+
         [HttpGet("search")]
-        public async Task<IActionResult> SearchUsersAsync([FromQuery] UserSearchModel userSearchModel)
+        public async Task<IActionResult> SearchUsersAsync([FromQuery] UserSearchPaginationModel userSearchModel)
         {
             return Ok(await userService.GetUsersWithNameAsync(userSearchModel));
         }
@@ -45,19 +52,21 @@ namespace Workout_tracking.Controllers
         [HttpPut("update")]
         public async Task<IActionResult> UpdateUserAsync([FromBody] UserUpdateModel userUpdateModel)
         {
-            return Ok(await userService.UpdateUserAsync(userUpdateModel, userResolverService.GetUserId()));
+            UserDto user = await userService.UpdateUserAsync(userUpdateModel, userResolverService.GetUserId());
+            
+            if (user is not null)
+                return Ok(user);
+            
+            return BadRequest();
         }
 
         [HttpPut("update/password")]
         public async Task<IActionResult> UpdateUserPasswordAsync([FromBody] PasswordUpdateModel updatePasswordModel)
         {
-            return Ok(await userService.UpdatePasswordAsync(updatePasswordModel, userResolverService.GetUserId()));
-        }
-
-        [HttpDelete]
-        public async Task<IActionResult> DeleteUserAsync()
-        {
-            return Ok(await userService.DeleteUserAsync(userResolverService.GetUserId()));
+            bool result = await userService.UpdatePasswordAsync(updatePasswordModel, userResolverService.GetUserId());
+            if (result)
+                return Ok();
+            return BadRequest();
         }
     }
 }

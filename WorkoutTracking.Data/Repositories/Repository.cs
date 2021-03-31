@@ -56,5 +56,10 @@ namespace WorkoutTracking.Data.Repositories
         {
             await context.SaveChangesAsync();
         }
+
+        public async Task<TEntity> GetByIdAsync(int id, int secondId)
+        {
+            return await dbEntities.FindAsync(id, secondId);
+        }
     }
 }

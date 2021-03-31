@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Models.Pagination;
 using WorkoutTracking.Data.Entities;
 
 namespace WorkoutTracking.Application.Services.Interfaces
 {
     public interface IFriendService
     {
-        Task<FriendRequest> SendFriendRequestAsync(User sender, User receiver);
-        Task<FriendRequest> AcceptFriendRequestAsync(User sender, User receiver);
-        Task<FriendRequest> RefuseFriendRequestAsync(User sender, User receiver);
-
-
+        Task<bool> MakeFriendsAsync(int requestFromId, int requestToId);
+        Task<IEnumerable<UserDto>> GetFriendsAsync(FriendPaginationModel model);
+        Task<IEnumerable<UserDto>> GetFriendsById(int userId);
     }
 }
