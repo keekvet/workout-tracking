@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Data.Entities;
 using WorkoutTracking.Data.EntitiesConfigurations;
+using WorkoutTracking.Data.Extension;
 
 namespace WorkoutTracking.Data.Context
 {
@@ -44,6 +45,8 @@ namespace WorkoutTracking.Data.Context
             modelBuilder.ApplyConfiguration(new TrainingTemplateConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new FriendRequestConfiguration());
+
+            modelBuilder.Seed();
         }
     }
 }

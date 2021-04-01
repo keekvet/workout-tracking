@@ -25,9 +25,11 @@ namespace Workout_tracking.Controllers
         }
 
         [HttpDelete("remove")]
-        public async Task<IActionResult> RemoveFriendAsync()
+        public async Task<IActionResult> RemoveFriendAsync([FromBody] int id)
         {
-            throw new NotImplementedException();
+            if (await friendService.RemoveFriendAsync(id, userResolverService.GetUserId()))
+                return Ok();
+            return BadRequest();
         }
 
         [HttpGet("all")]

@@ -67,6 +67,9 @@ namespace WorkoutTracking.Application.Services.Implementations
             SortedPaginationModel model,
             IEnumerable<TEntity> source)
         {
+            if (source is null)
+                return null;
+
             if (model.PropertyToSort is not null)
             {
                 PropertyDescriptor sortProperty =

@@ -7,3 +7,16 @@
 
 6. add friend controller
 7. notate all method in controllers as "paged" or "paginated"
+8. resolve followingService and friendService dependency problem
+
+
+
+
+
+
+
+
+
+
+
+

@@ -41,10 +41,11 @@ namespace WorkoutTracking.Application.Services.Implementations
             User user = await userService.GetUserEntityByIdAsync(userId);
             User userToFollow = await userService.GetUserEntityByIdAsync(userToFollowId);
 
-            if (user is null 
+            if (userToFollowId.Equals(userId)
+                ||user is null 
                 || userToFollow is null 
                 || user.Following.Contains(userToFollow) 
-                || (await friendService.GetFriendsById(userId)).Where(u => u.Id.Equals(userToFollowId)).Any())
+                || (await friendService.GetFriendsByIdAsync(userId)).Where(u => u.Id.Equals(userToFollowId)).Any())
                 return false;
 
             user.Following.Add(userToFollow);

@@ -18,19 +18,16 @@ namespace WorkoutTracking.Application.Services.Implementations
         IMapper mapper;
         IUserService userService;
         IRepository<User> userRepository;
-        IFollowingService followingService;
         IPaginationService<User, UserDto> paginationService;
         public FriendService(
             IMapper mapper,
             IUserService userService,
             IRepository<User> userRepository,
-            IFollowingService followingService,
             IPaginationService<User, UserDto> paginationService)
         {
             this.mapper = mapper;
             this.userService = userService;
             this.userRepository = userRepository;
-            this.followingService = followingService;
             this.paginationService = paginationService;
         }
 
@@ -47,9 +44,7 @@ namespace WorkoutTracking.Application.Services.Implementations
             await userRepository.UpdateAsync(userRequestFrom);
             await userRepository.SaveChangesAsync();
 
-            await followingService.RemoveFollowingAsync(requestToId, requestFromId);
-            await followingService.RemoveFollowingAsync(requestFromId, requestToId);
-
+           
             return true;
         }
 
@@ -57,15 +52,38 @@ namespace WorkoutTracking.Application.Services.Implementations
         {
             User user = await userService.GetUserEntityByIdAsync(model.UserId);
 
-            IEnumerable<User> friends = user.FriendsFrom.Union(user.FriendsTo);
+            IEnumerable<User> friends = user?.FriendsFrom.Union(user.FriendsTo);
+
+            if (friends is null)
+                return null;
+
             return paginationService.MakePage(model, friends);
         }
 
-        public async Task<IEnumerable<UserDto>> GetFriendsById(int userId)
+        public async Task<IEnumerable<UserDto>> GetFriendsByIdAsync(int userId)
         {
             User user = await userService.GetUserEntityByIdAsync(userId);
 
-            return user.FriendsFrom.Union(user.FriendsTo).Select(u => mapper.Map<User, UserDto>(u));
+            return user?.FriendsFrom.Union(user.FriendsTo).Select(u => mapper.Map<User, UserDto>(u));
+        }
+
+        public async Task<bool> RemoveFriendAsync(int friendId, int userId)
+        {
+            IEnumerable<UserDto> friends = await GetFriendsByIdAsync(userId);
+
+            if (friends is null || !friends.Where(u => u.Id.Equals(friendId)).Any())
+                return false;
+
+            User user = await userService.GetUserEntityByIdAsync(userId);
+            User friend = await userService.GetUserEntityByIdAsync(friendId);
+
+            if (!user.FriendsFrom.Remove(friend))
+                user.FriendsTo.Remove(friend);
+
+            await userRepository.UpdateAsync(user);
+            await userRepository.SaveChangesAsync();
+
+            return true;
         }
     }
 }

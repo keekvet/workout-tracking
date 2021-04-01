@@ -15,6 +15,6 @@ namespace WorkoutTracking.Application.Services.Interfaces
         Task<IEnumerable<FriendRequestDto>> GetInputFriendRequestsAsync(SortedPaginationModel model, int userId);
         Task<IEnumerable<FriendRequestDto>> GetOutputFriendRequestsAsync(SortedPaginationModel model, int userId);
         Task<FriendRequestDto> UpdateFriendRequestStateAsync(FriendRequestStateUpdateModel model, int receiverId);
-        Task<bool> RemoveFriendRequestAsync(int friendRequestId, int senderId);
+        Task<bool> RemoveFriendRequestAsync(int receiverId, int senderId);
     }
 }

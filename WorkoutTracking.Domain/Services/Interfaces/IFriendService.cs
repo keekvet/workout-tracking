@@ -13,6 +13,7 @@ namespace WorkoutTracking.Application.Services.Interfaces
     {
         Task<bool> MakeFriendsAsync(int requestFromId, int requestToId);
         Task<IEnumerable<UserDto>> GetFriendsAsync(FriendPaginationModel model);
-        Task<IEnumerable<UserDto>> GetFriendsById(int userId);
+        Task<IEnumerable<UserDto>> GetFriendsByIdAsync(int userId);
+        Task<bool> RemoveFriendAsync(int friendId, int userId);
     }
 }

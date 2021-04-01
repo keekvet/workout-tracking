@@ -11,7 +11,7 @@ using WorkoutTracking.Application.Services.Interfaces;
 namespace Workout_tracking.Controllers
 {
     [ApiController]
-    [Route("api/register/")]
+    [Route("api/register")]
     public class RegisterController : ControllerBase
     {
         private readonly IRegisterService registerService;

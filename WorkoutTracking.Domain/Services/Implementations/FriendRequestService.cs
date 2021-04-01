@@ -22,6 +22,7 @@ namespace WorkoutTracking.Application.Services.Implementations
         private readonly IMapper mapper;
         private readonly IUserService userService;
         private readonly IFriendService friendService;
+        private readonly IFollowingService followingService;
         private readonly IRepository<FriendRequest> friendRequestRepository;
         private readonly IPaginationService<FriendRequest, FriendRequestDto> paginationService;
 
@@ -29,12 +30,14 @@ namespace WorkoutTracking.Application.Services.Implementations
             IMapper mapper,
             IUserService userService,
             IFriendService friendService,
+            IFollowingService followingService,
             IRepository<FriendRequest> friendRequestRepository,
             IPaginationService<FriendRequest, FriendRequestDto> paginationService)
         {
             this.mapper = mapper;
             this.userService = userService;
             this.friendService = friendService;
+            this.followingService = followingService;
             this.paginationService = paginationService;
             this.friendRequestRepository = friendRequestRepository;
         }
@@ -78,12 +81,12 @@ namespace WorkoutTracking.Application.Services.Implementations
             return mapper.Map<FriendRequest, FriendRequestDto>(requestResult);
         }
 
-        public async Task<bool> RemoveFriendRequestAsync(int friendRequestId, int senderId)
+        public async Task<bool> RemoveFriendRequestAsync(int receiverId, int senderId)
         {
             FriendRequest friendRequest =
-                await friendRequestRepository.GetByIdAsync(friendRequestId);
+                await friendRequestRepository.GetByIdAsync(senderId, receiverId);
 
-            if (friendRequest is null || !friendRequest.RequestFromId.Equals(senderId))
+            if (friendRequest is null)
                 return false;
 
             bool result = await friendRequestRepository.DeleteAsync(friendRequest);
@@ -107,13 +110,18 @@ namespace WorkoutTracking.Application.Services.Implementations
             await friendRequestRepository.SaveChangesAsync();
 
             bool makeFriendResult = false;
-            
-            if (model.State is FriendRequestState.Accepted) 
-                makeFriendResult = 
+
+            if (model.State is FriendRequestState.Accepted)
+            {
+                makeFriendResult =
                     await friendService.MakeFriendsAsync(friendRequest.RequestFromId, friendRequest.RequestToId);
+            }
 
             if (!makeFriendResult)
                 return null;
+
+            await followingService.RemoveFollowingAsync(friendRequest.RequestToId, friendRequest.RequestFromId);
+            await followingService.RemoveFollowingAsync(friendRequest.RequestFromId, friendRequest.RequestToId);
 
             return mapper.Map<FriendRequest, FriendRequestDto>(friendRequest);
         }
