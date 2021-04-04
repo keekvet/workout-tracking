@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Application.Models;
+using WorkoutTracking.Application.Models.FriendRequest;
 using WorkoutTracking.Data.Enums;
 
 namespace WorkoutTracking.Application.Validators

@@ -58,11 +58,11 @@ namespace WorkoutTracking.Application.Services.Implementations
         public async Task<bool> RemoveFollowingAsync(int userToUnfollow, int userId)
         {
             User user = await userService.GetUserEntityByIdAsync(userId);
+            User userToRemove = user.Following.Where(u => u.Id.Equals(userToUnfollow)).FirstOrDefault();
 
-            if (user is null)
+            if (userToRemove is null || user is null)
                 return false;
 
-            User userToRemove = user.Following.Where(u => u.Id.Equals(userToUnfollow)).FirstOrDefault();
             user.Following.Remove(userToRemove);
 
             await userRepository.UpdateAsync(user);

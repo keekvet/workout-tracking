@@ -40,7 +40,7 @@ namespace WorkoutTracking.Application.Services.Implementations
             User foundUser = await userService.GetUserEntityByNameAsync(user.Name);
 
             if (foundUser is null ||
-                !await encryptionService.PasswordEqualsHash(user.Password, foundUser.PasswordHash, foundUser.Salt))
+                !await encryptionService.PasswordEqualsHashAsync(user.Password, foundUser.PasswordHash, foundUser.Salt))
             {
                 throw new InvalidCredentialException("user name or password incorrect");
             }

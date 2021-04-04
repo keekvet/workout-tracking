@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Workout_tracking.Filters
 {
-    public class LoginFilter : Attribute, IExceptionFilter
+    public class CredentialsFilter : Attribute, IExceptionFilter
     {
         public void OnException(ExceptionContext context)
         {

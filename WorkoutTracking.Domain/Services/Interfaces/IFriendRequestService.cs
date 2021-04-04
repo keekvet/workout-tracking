@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Application.Dto;
 using WorkoutTracking.Application.Models;
+using WorkoutTracking.Application.Models.FriendRequest;
 using WorkoutTracking.Application.Models.Pagination.Base;
 
 namespace WorkoutTracking.Application.Services.Interfaces

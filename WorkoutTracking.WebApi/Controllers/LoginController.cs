@@ -24,7 +24,7 @@ namespace Workout_tracking.Controllers
         }
 
         [HttpPost]
-        [LoginFilter]
+        [CredentialsFilter]
         public async Task<IActionResult> Login(UserLoginModel user)
         {
             return Ok(await loginService.LoginAsync(user));

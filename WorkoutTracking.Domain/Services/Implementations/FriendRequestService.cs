@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Application.Dto;
 using WorkoutTracking.Application.Models;
+using WorkoutTracking.Application.Models.FriendRequest;
 using WorkoutTracking.Application.Models.Pagination;
 using WorkoutTracking.Application.Models.Pagination.Base;
 using WorkoutTracking.Application.Services.Interfaces;
@@ -65,7 +66,8 @@ namespace WorkoutTracking.Application.Services.Implementations
                 userSender is null 
                 || userReceiver is null
                 || userSender.SendedFriendRequests.Where(f => f.RequestToId.Equals(receiverId)).Any()
-                || userSender.SendedFriendRequests.Where(f => f.RequestToId.Equals(receiverId)).Any())
+                || userSender.SendedFriendRequests.Where(f => f.RequestToId.Equals(receiverId)).Any()
+                || receiverId.Equals(senderId))
                 return null;
 
             FriendRequest friendRequest = new FriendRequest()

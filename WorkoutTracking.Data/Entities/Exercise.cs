@@ -12,6 +12,7 @@ namespace WorkoutTracking.Data.Entities
         public string Name { get; set; }
         public string Note { get; set; }
         public int Position { get; set; }
+        public int TrainingTemplateId { get; set; }
         public virtual TrainingTemplate TrainingTemplate { get; set; }
         public virtual ICollection<ExerciseProperty> Properties { get; set; } = new List<ExerciseProperty>();
         public virtual ICollection<ExerciseHistory> History { get; set; } = new List<ExerciseHistory>();

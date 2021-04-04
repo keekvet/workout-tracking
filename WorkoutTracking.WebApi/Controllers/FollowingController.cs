@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WorkoutTracking.Application.Dto;
 using WorkoutTracking.Application.Models;
 using WorkoutTracking.Application.Models.Pagination;
 using WorkoutTracking.Application.Services.Interfaces;
@@ -50,13 +51,19 @@ namespace Workout_tracking.Controllers
         [HttpGet("following")]
         public async Task<IActionResult> GetFollowingAsync([FromQuery] FollowingPaginationModel model)
         {
-            return Ok(await followingService.GetFollowingAsync(model));
+            IEnumerable<UserDto> users = await followingService.GetFollowingAsync(model);
+            if(users is not null)
+                return Ok(users);
+            return BadRequest();
         }
 
-        [HttpGet("follower")]
+        [HttpGet("followers")]
         public async Task<IActionResult> GetFollowersAsync([FromQuery] FollowingPaginationModel model)
         {
-            return Ok(await followingService.GetFollowersAsync(model));
+            IEnumerable<UserDto> users = await followingService.GetFollowersAsync(model);
+            if (users is not null)
+                return Ok(users);
+            return BadRequest();
         }
     }
 }

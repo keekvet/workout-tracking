@@ -49,7 +49,7 @@ namespace WorkoutTracking.Application.Services.Implementations
             return await EncryptAsync(data, salt);
         }
 
-        public async Task<bool> PasswordEqualsHash(string password, byte[] hash, byte[] salt)
+        public async Task<bool> PasswordEqualsHashAsync(string password, byte[] hash, byte[] salt)
         {
             HashedPassword hashedPassword = await EncryptAsync(
                    Encoding.UTF8.GetBytes(password), salt);

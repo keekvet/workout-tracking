@@ -11,5 +11,6 @@ namespace WorkoutTracking.Application.Services.Interfaces
     public interface ITrainingCategoryService
     {
         Task<IEnumerable<TrainingCategoryDto>> GetAllAsync(SortedPaginationModel model);
+        Task<TrainingCategoryDto> GetCategoryById(int id);
     }
 }

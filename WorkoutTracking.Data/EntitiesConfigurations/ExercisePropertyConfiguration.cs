@@ -18,6 +18,7 @@ namespace WorkoutTracking.Data.EntitiesConfigurations
             builder
                 .HasOne(e => e.Exercise)
                 .WithMany(e => e.Properties)
+                .HasForeignKey(e => e.ExerciseId)
                 .IsRequired();
         }
     }

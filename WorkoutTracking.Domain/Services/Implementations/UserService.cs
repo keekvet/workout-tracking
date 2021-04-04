@@ -103,11 +103,9 @@ namespace WorkoutTracking.Application.Services.Implementations
             if (user is null)
                 return false;
 
-            HashedPassword currentHashedPassword = await encryptionService.EncryptAsync(
-                Encoding.UTF8.GetBytes(updatePasswordModel.CurrentPassword),
-                user.Salt);
-
-            if (!currentHashedPassword.Hash.Equals(user.PasswordHash))
+            if (!await encryptionService.PasswordEqualsHashAsync(
+                updatePasswordModel.CurrentPassword, 
+                user.PasswordHash, user.Salt))
                 throw new InvalidCredentialException("wrong password");
 
             HashedPassword newHashedPassword = await encryptionService.EncryptAsync(
@@ -115,6 +113,9 @@ namespace WorkoutTracking.Application.Services.Implementations
 
             user.PasswordHash = newHashedPassword.Hash;
             user.Salt = newHashedPassword.Salt;
+
+            await userRepository.UpdateAsync(user);
+            await userRepository.SaveChangesAsync();
 
             return true;
         }

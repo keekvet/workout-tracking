@@ -12,7 +12,9 @@ namespace WorkoutTracking.Data.Entities
         public string Note { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
+        public int TrainingHistoryId { get; set; }
         public virtual TrainingHistory TrainingHistory { get; set; }
+        public int ExerciseId { get; set; }
         public virtual Exercise Exercise { get; set; }
     }
 }

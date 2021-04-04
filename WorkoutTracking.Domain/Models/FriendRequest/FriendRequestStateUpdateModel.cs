@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Data.Enums;
 
-namespace WorkoutTracking.Application.Models
+namespace WorkoutTracking.Application.Models.FriendRequest
 {
     public class FriendRequestStateUpdateModel
     {

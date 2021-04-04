@@ -30,24 +30,29 @@ namespace Workout_tracking.ServiceExtention
             services.AddScoped<IFriendService, FriendService>();
             services.AddScoped<IFriendRequestService, FriendRequestService>();
             services.AddScoped<ITrainingCategoryService, TrainingCategoryService>();
+            services.AddScoped<ITrainingTemplateService, TrainingTemplateService>();
             #endregion
-            
+
             #region pagination services
             services.AddScoped<
-                IPaginationService<User, UserDto>, 
+                IPaginationService<User, UserDto>,
                 PaginationService<User, UserDto>>();
             services.AddScoped<
-                IPaginationService<FriendRequest, FriendRequestDto>, 
+                IPaginationService<FriendRequest, FriendRequestDto>,
                 PaginationService<FriendRequest, FriendRequestDto>>();
             services.AddScoped<
                 IPaginationService<TrainingCategory, TrainingCategoryDto>,
                 PaginationService<TrainingCategory, TrainingCategoryDto>>();
+            services.AddScoped<
+                IPaginationService<TrainingTemplate, TrainingTemplateDto>,
+                PaginationService<TrainingTemplate, TrainingTemplateDto>>();
             #endregion
 
             #region repositories
             services.AddScoped<IRepository<User>, Repository<User>>();
             services.AddScoped<IRepository<FriendRequest>, Repository<FriendRequest>>();
             services.AddScoped<IRepository<TrainingCategory>, Repository<TrainingCategory>>();
+            services.AddScoped<IRepository<TrainingTemplate>, Repository<TrainingTemplate>>();
             #endregion
 
             return services;

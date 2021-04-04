@@ -13,6 +13,7 @@ using WorkoutTracking.Application.Models.User;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using WorkoutTracking.Application.Dto;
+using Workout_tracking.Filters;
 
 namespace Workout_tracking.Controllers
 {
@@ -60,6 +61,7 @@ namespace Workout_tracking.Controllers
             return BadRequest();
         }
 
+        [CredentialsFilter]
         [HttpPut("update/password")]
         public async Task<IActionResult> UpdateUserPasswordAsync([FromBody] PasswordUpdateModel updatePasswordModel)
         {

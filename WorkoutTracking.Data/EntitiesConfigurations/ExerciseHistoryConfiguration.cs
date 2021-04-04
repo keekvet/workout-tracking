@@ -19,11 +19,13 @@ namespace WorkoutTracking.Data.EntitiesConfigurations
             builder
                 .HasOne(e => e.Exercise)
                 .WithMany(e => e.History)
+                .HasForeignKey(e => e.ExerciseId)
                 .IsRequired();
 
             builder
                 .HasOne(e => e.TrainingHistory)
                 .WithMany(t => t.ExerciseHistory)
+                .HasForeignKey(e => e.TrainingHistoryId)
                 .IsRequired();
         }
     }
