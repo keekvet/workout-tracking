@@ -16,8 +16,7 @@ namespace WorkoutTracking.Application.Services.Implementations
 {
     public class FollowingService : IFollowingService
     {
-        IMapper mapper;
-        IFriendService friendService;
+        private readonly IFriendService friendService;
         private readonly IUserService userService;
         private readonly IRepository<User> userRepository;
         private readonly IPaginationService<User, UserDto> paginationService;
@@ -26,10 +25,8 @@ namespace WorkoutTracking.Application.Services.Implementations
             IPaginationService<User, UserDto> paginationService,
             IRepository<User> userRepository,
             IFriendService friendService,
-            IUserService userService, 
-            IMapper mapper)
+            IUserService userService)
         {
-            this.mapper = mapper;
             this.userService = userService;
             this.friendService = friendService;
             this.userRepository = userRepository;

@@ -10,7 +10,7 @@ using WorkoutTracking.Application.Services.Interfaces;
 
 namespace Workout_tracking.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/friend")]
     public class FriendController : ControllerBase

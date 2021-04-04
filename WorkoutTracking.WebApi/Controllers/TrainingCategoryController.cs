@@ -15,7 +15,7 @@ namespace Workout_tracking.Controllers
     [Route("api/training-category")]
     public class TrainingCategoryController : ControllerBase
     {
-        ITrainingCategoryService trainingCategoryService;
+        private readonly ITrainingCategoryService trainingCategoryService;
 
         public TrainingCategoryController(ITrainingCategoryService trainingCategoryService)
         {

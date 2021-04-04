@@ -11,7 +11,7 @@ namespace WorkoutTracking.Application.Services.Implementations
 {
     public class UserResolverService : IUserResolverService
     {
-        IHttpContextAccessor context;
+        private readonly IHttpContextAccessor context;
 
         public UserResolverService(IHttpContextAccessor context)
         {

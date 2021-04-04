@@ -15,7 +15,7 @@ namespace WorkoutTracking.Application.Mapping
         public TrainingTemplateMapper()
         {
             CreateMap<TrainingTemplate, TrainingTemplateDto>();
-            CreateMap<TrainingTemplateModel, TrainingTemplate>();
+            CreateMap<TrainingTemplateModel, TrainingTemplate>().ReverseMap();
             CreateMap<TrainingTemplateUpdateModel, TrainingTemplate>();
             CreateMap<TrainingTemplateUpdateModel, TrainingTemplateModel>().ReverseMap();
         }

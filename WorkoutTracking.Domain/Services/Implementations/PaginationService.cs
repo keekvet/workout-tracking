@@ -63,9 +63,9 @@ namespace WorkoutTracking.Application.Services.Implementations
                 .ToListAsync();
         }
 
-        public IEnumerable<TDto> MakePage(
+        public IEnumerable<T> MakePage<T>(
             SortedPaginationModel model,
-            IEnumerable<TEntity> source)
+            IEnumerable<T> source)
         {
             if (source is null)
                 return null;
@@ -85,7 +85,15 @@ namespace WorkoutTracking.Application.Services.Implementations
 
             return source
             .Skip(model.Offset.Value)
-            .Take(model.Count.Value)
+            .Take(model.Count.Value);
+        }
+
+        public IEnumerable<TDto> MakePage(
+            SortedPaginationModel model,
+            IEnumerable<TEntity> source)
+        {
+            
+            return MakePage<TEntity>(model, source)
             .Select(e => mapper.Map<TEntity, TDto>(e));
         }
     }

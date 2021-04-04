@@ -16,5 +16,6 @@ namespace WorkoutTracking.Application.Services.Interfaces
             SortedPaginationModel model, 
             Expression<Func<TEntity, bool>> filter = null);
         IEnumerable<TDto> MakePage(SortedPaginationModel model, IEnumerable<TEntity> source);
+        IEnumerable<T> MakePage<T>(SortedPaginationModel model, IEnumerable<T> source);
     }
 }

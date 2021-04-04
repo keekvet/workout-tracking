@@ -14,9 +14,9 @@ namespace WorkoutTracking.Application.Services.Implementations
 {
     public class TrainingCategoryService : ITrainingCategoryService
     {
-        IMapper mapper;
-        IRepository<TrainingCategory> trainingRepository;
-        IPaginationService<TrainingCategory, TrainingCategoryDto> paginationService;
+        private readonly IMapper mapper;
+        private readonly IRepository<TrainingCategory> trainingRepository;
+        private readonly IPaginationService<TrainingCategory, TrainingCategoryDto> paginationService;
 
         public TrainingCategoryService(
             IMapper mapper,

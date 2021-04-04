@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using WorkoutTracking.Data.Enums;
 
 namespace Workout_tracking.Controllers
 {
+    [Authorize]
     [Route("api/friend-request")]
     [ApiController]
     public class FriendRequestController : ControllerBase

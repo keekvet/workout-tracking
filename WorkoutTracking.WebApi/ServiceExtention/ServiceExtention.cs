@@ -31,6 +31,8 @@ namespace Workout_tracking.ServiceExtention
             services.AddScoped<IFriendRequestService, FriendRequestService>();
             services.AddScoped<ITrainingCategoryService, TrainingCategoryService>();
             services.AddScoped<ITrainingTemplateService, TrainingTemplateService>();
+            services.AddScoped<IPublicTrainingTemplateService, PublicTrainingTemplateService>();
+            services.AddScoped<IExerciseService, ExerciseService>();
             #endregion
 
             #region pagination services
@@ -46,6 +48,9 @@ namespace Workout_tracking.ServiceExtention
             services.AddScoped<
                 IPaginationService<TrainingTemplate, TrainingTemplateDto>,
                 PaginationService<TrainingTemplate, TrainingTemplateDto>>();
+            services.AddScoped<
+                IPaginationService<PublicTrainingTemplate, PublicTrainingTemplateDto>,
+                PaginationService<PublicTrainingTemplate, PublicTrainingTemplateDto>>();
             #endregion
 
             #region repositories
@@ -53,6 +58,7 @@ namespace Workout_tracking.ServiceExtention
             services.AddScoped<IRepository<FriendRequest>, Repository<FriendRequest>>();
             services.AddScoped<IRepository<TrainingCategory>, Repository<TrainingCategory>>();
             services.AddScoped<IRepository<TrainingTemplate>, Repository<TrainingTemplate>>();
+            services.AddScoped<IRepository<PublicTrainingTemplate>, Repository<PublicTrainingTemplate>>();
             #endregion
 
             return services;

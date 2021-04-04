@@ -5,9 +5,12 @@
 
 5. check update users when name changed - (removed)
 
-6. add friend controller
+6. add friend controller +
 7. notate all method in controllers as "paged" or "paginated"
 8. resolve followingService and friendService dependency problem +
+
+9. add default number of items per page
+10. add exercises and clone template
 
 
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Models.Pagination.Base;
 using WorkoutTracking.Application.Models.TrainingTemplate;
 using WorkoutTracking.Application.Services.Interfaces;
 using WorkoutTracking.Data.Entities;
@@ -14,11 +15,11 @@ namespace WorkoutTracking.Application.Services.Implementations
 {
     public class TrainingTemplateService : ITrainingTemplateService
     {
-        IMapper mapper;
-        IUserService userService;
-        ITrainingCategoryService trainingCategoryService;
-        IRepository<TrainingTemplate> traingingTemplateRepository;
-        IPaginationService<TrainingTemplate, TrainingTemplateDto> paginationService;
+        private readonly IMapper mapper;
+        private readonly IUserService userService;
+        private readonly ITrainingCategoryService trainingCategoryService;
+        private readonly IRepository<TrainingTemplate> traingingTemplateRepository;
+        private readonly IPaginationService<TrainingTemplate, TrainingTemplateDto> paginationService;
 
         public TrainingTemplateService(
             IMapper mapper,
@@ -66,10 +67,16 @@ namespace WorkoutTracking.Application.Services.Implementations
             return mapper.Map<TrainingTemplate, TrainingTemplateDto>(trainingTemplate);
         }
 
-        public async Task<IEnumerable<TrainingTemplateDto>> GetTrainingTemplatesByUserIdAsync(int userId)
+        public async Task<IEnumerable<TrainingTemplateDto>> GetTrainingTemplatesByUserIdAsync(
+            SortedPaginationModel model,
+            int userId)
         {
-            return (await userService.GetUserEntityByIdAsync(userId))?.TrainingTemplates
-                .Select(t => mapper.Map<TrainingTemplate, TrainingTemplateDto>(t));
+            User user = await userService.GetUserEntityByIdAsync(userId);
+            
+            if (user is null)
+                return null;
+
+            return paginationService.MakePage(model, user.TrainingTemplates);
         }
 
         public async Task<TrainingTemplateDto> AddTrainingTemplateAsync(TrainingTemplateModel model, int userId)
@@ -96,6 +103,40 @@ namespace WorkoutTracking.Application.Services.Implementations
             await traingingTemplateRepository.SaveChangesAsync();
             
             return true;
+        }
+
+        public async Task<TrainingTemplateDto> GetTrainingTemplateById(int templateId, int userId)
+        {
+            TrainingTemplate template = await traingingTemplateRepository.GetByIdAsync(templateId);
+
+            if (!template.CreatorId.Equals(userId))
+                return null;
+            return mapper.Map<TrainingTemplate, TrainingTemplateDto>(template);
+        }
+        
+        public async Task<TrainingTemplateDto> CloneForCreatorAsync(int templateId, int userId)
+        {
+            TrainingTemplate template = await traingingTemplateRepository.GetByIdAsync(templateId);
+
+            if (!template.CreatorId.Equals(userId))
+                return null;
+
+            return await CloneAsync(template, userId);
+        }
+
+        public async Task<TrainingTemplateDto> CloneAsync(TrainingTemplate template, int userId)
+        {
+            User user = await userService.GetUserEntityByIdAsync(userId);
+
+            if (template is null || user is null)
+                return null;
+
+            template = mapper.Map<TrainingTemplate, TrainingTemplate>(template);
+
+            template.Id = 0; 
+
+            return await AddTrainingTemplateAsync(mapper.Map<TrainingTemplate, TrainingTemplateModel>(template),
+                                                  userId);
         }
     }
 }

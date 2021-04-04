@@ -12,7 +12,7 @@ using WorkoutTracking.Application.Services.Interfaces;
 
 namespace Workout_tracking.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/observing")]
     public class FollowingController : ControllerBase

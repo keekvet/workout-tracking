@@ -15,10 +15,10 @@ namespace WorkoutTracking.Application.Services.Implementations
 {
     public class FriendService : IFriendService
     {
-        IMapper mapper;
-        IUserService userService;
-        IRepository<User> userRepository;
-        IPaginationService<User, UserDto> paginationService;
+        private readonly IMapper mapper;
+        private readonly IUserService userService;
+        private readonly IRepository<User> userRepository;
+        private readonly IPaginationService<User, UserDto> paginationService;
         public FriendService(
             IMapper mapper,
             IUserService userService,
