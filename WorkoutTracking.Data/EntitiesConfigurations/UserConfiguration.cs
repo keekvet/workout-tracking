@@ -24,10 +24,6 @@ namespace WorkoutTracking.Data.EntitiesConfigurations
             builder.Ignore(u => u.Jwt);
 
             builder
-                .HasMany(u => u.PublicTrainingTemplates)
-                .WithMany(t => t.Users);
-
-            builder
                 .HasMany(u => u.FriendsTo)
                 .WithMany(u => u.FriendsFrom)
                 .UsingEntity(x => x.ToTable("UserFriends"));

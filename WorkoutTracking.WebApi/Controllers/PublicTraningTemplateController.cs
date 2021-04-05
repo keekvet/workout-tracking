@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Models.Pagination;
 using WorkoutTracking.Application.Services.Interfaces;
 
 namespace Workout_tracking.Controllers
@@ -26,9 +28,54 @@ namespace Workout_tracking.Controllers
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddPublicTemplate([FromBody] int templateId)
+        public async Task<IActionResult> AddPublicTemplateAsync([FromBody] int templateId)
         {
-            throw new NotImplementedException();
+            PublicTrainingTemplateDto templateDto = 
+                await publicTraningService.AddPublicTemplateAsync(templateId, userResolverService.GetUserId());
+
+            if (templateDto is not null)
+                return Ok(templateDto);
+            return BadRequest();
         }
+
+        [HttpPost("clone")]
+        public async Task<IActionResult> ClonePublicTemplateAsync([FromBody] int templateId)
+        {
+            TrainingTemplateDto templateDto =
+                await publicTraningService.ClonePublicTemplateAsync(templateId, userResolverService.GetUserId());
+
+            if (templateDto is not null)
+                return Ok(templateDto);
+            return BadRequest();
+        }
+
+        [HttpDelete("remove")]
+        public async Task<IActionResult> DeletePublicTemplateAsync([FromBody] int templateId)
+        {
+            bool result = await publicTraningService.DeletePublicTemplateAsync(
+                templateId, 
+                userResolverService.GetUserId());
+
+            if (result)
+                return Ok();
+            return BadRequest();
+        }
+
+        [HttpGet("all")]
+        public async Task<IActionResult> GetPublicTemplatesAsync(
+            [FromQuery] PublicTrainingTemplatePaginationModel model)
+        {
+            return Ok(await publicTraningService.GetPublicTemplatesAsync(model));
+        }
+
+        [HttpGet("user/{userId}")]
+        public async Task<IActionResult> GetPublicTemplates(
+            [FromQuery] PublicTrainingTemplatePaginationModel model, 
+            int userId)
+        {
+            return Ok(await publicTraningService.GetPublicTemplatesAsync(model, userId));
+        }
+
+
     }
 }

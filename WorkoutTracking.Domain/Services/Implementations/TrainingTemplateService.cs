@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Extensions;
 using WorkoutTracking.Application.Models.Pagination.Base;
 using WorkoutTracking.Application.Models.TrainingTemplate;
 using WorkoutTracking.Application.Services.Interfaces;
@@ -131,9 +132,8 @@ namespace WorkoutTracking.Application.Services.Implementations
             if (template is null || user is null)
                 return null;
 
-            template = mapper.Map<TrainingTemplate, TrainingTemplate>(template);
-
-            template.Id = 0; 
+            template = template.Clone();
+            template.CreatorId = userId;
 
             return await AddTrainingTemplateAsync(mapper.Map<TrainingTemplate, TrainingTemplateModel>(template),
                                                   userId);

@@ -24,7 +24,5 @@ namespace WorkoutTracking.Data.Entities
         public virtual ICollection<User> Following { get; set; }
         public virtual ICollection<TrainingHistory> TrainingHistory { get; set; } = new List<TrainingHistory>();
         public virtual ICollection<TrainingTemplate> TrainingTemplates { get; set; } = new List<TrainingTemplate>();
-        public virtual ICollection<PublicTrainingTemplate> PublicTrainingTemplates{ get; set; } 
-            = new List<PublicTrainingTemplate>();
     }
 }
