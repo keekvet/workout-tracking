@@ -4,22 +4,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WorkoutTracking.Application.Models.TrainingTemplate;
+using WorkoutTracking.Application.Models.Exercise;
 
 namespace WorkoutTracking.Application.Validators
 {
-    public class TrainingTemplateValidator : AbstractValidator<TrainingTemplateModel>
+    public class ExerciseUpdateValidator : AbstractValidator<ExerciseUpdateModel>
     {
-        public TrainingTemplateValidator()
+        public ExerciseUpdateValidator()
         {
-            RuleFor(t => t.CategoryId)
+            RuleFor(e => e.Id)
                 .NotNull()
                 .NotEmpty();
 
-            RuleFor(t => t.Name)
+            RuleFor(e => e.Name)
                 .NotNull()
                 .NotEmpty()
                 .MaximumLength(50);
+
+            RuleFor(e => e.Note)
+                .NotEmpty()
+                .MaximumLength(500);
+
         }
     }
 }

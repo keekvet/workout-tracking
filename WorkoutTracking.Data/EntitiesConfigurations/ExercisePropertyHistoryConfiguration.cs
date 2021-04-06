@@ -9,16 +9,19 @@ using WorkoutTracking.Data.Entities;
 
 namespace WorkoutTracking.Data.EntitiesConfigurations
 {
-    public class ExercisePropertyConfiguration : IEntityTypeConfiguration<ExerciseProperty>
+    public class ExercisePropertyHistoryConfiguration : IEntityTypeConfiguration<ExercisePropertyHistory>
     {
-        public void Configure(EntityTypeBuilder<ExerciseProperty> builder)
+        
+
+        public void Configure(EntityTypeBuilder<ExercisePropertyHistory> builder)
         {
             builder.Property(e => e.Duration).IsRequired();
+
             builder
-                .HasOne(e => e.Exercise)
-                .WithMany(e => e.Properties)
-                .HasForeignKey(e => e.ExerciseId)
-                .IsRequired();
+                .HasOne(e => e.ExerciseHistory)
+                    .WithMany(e => e.Properties)
+                    .HasForeignKey(e => e.ExerciseHistoryId)
+                    .IsRequired();
         }
     }
 }

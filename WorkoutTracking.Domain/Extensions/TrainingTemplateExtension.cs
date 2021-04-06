@@ -11,6 +11,7 @@ namespace WorkoutTracking.Application.Extensions
     {
         public static TrainingTemplate Clone(this TrainingTemplate template)
         {
+
             return new TrainingTemplate()
             {
                 Name = template.Name,

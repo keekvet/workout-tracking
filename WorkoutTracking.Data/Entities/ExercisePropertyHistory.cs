@@ -7,13 +7,13 @@ using WorkoutTracking.Data.Enums;
 
 namespace WorkoutTracking.Data.Entities
 {
-    public class ExerciseProperty
+    public class ExercisePropertyHistory
     {
         public int Id { get; set; }
         public int Duration { get; set; }
         public ExerciseDurationType DurationType { get; set; }
         public int Weigth { get; set; }
-        public int ExerciseId { get; set; }
-        public virtual Exercise Exercise { get; set; }
+        public int ExerciseHistoryId { get; set; }
+        public virtual ExerciseHistory ExerciseHistory { get; set; }
     }
 }

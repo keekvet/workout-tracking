@@ -22,8 +22,7 @@ namespace WorkoutTracking.Data.EntitiesConfigurations
             builder
                 .HasOne(e => e.TrainingTemplate)
                 .WithMany(t => t.Exercises)
-                .HasForeignKey(e => e.TrainingTemplateId)
-                .IsRequired();
+                .HasForeignKey(e => e.TrainingTemplateId);
         }
     }
 }

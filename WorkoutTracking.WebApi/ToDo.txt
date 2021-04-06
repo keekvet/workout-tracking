@@ -1,25 +1,41 @@
-﻿1. add isRequired and on delete to entities +
+﻿
+
+
+
+
+
+
+
+
+
+1. add isRequired and on delete to entities +
 2. add friend request list to entities +
 3. add user password and encryption +
 4. restrict user name size, password +
-
 5. check update users when name changed - (removed)
-
 6. add friend controller +
 7. notate all method in controllers as "paged" or "paginated"
 8. resolve followingService and friendService dependency problem +
+9. add default number of items per page
+10. add exercises and clone template +
+11. change entity enums to tables
+12. Exercise orders +
+13. restrict number of exercises per training +
+14. restrict numver of properties per exercise +
+
+
+
+
+
+
+ACTIVE
+
+7. notate all method in controllers as "paged" or "paginated"
 
 9. add default number of items per page
-10. add exercises and clone template
 
+11. change entity enums to tables
 
+13. restrict number of exercises per training
 
-
-
-
-
-
-
-
-
-
+14. restrict numver of properties per exercise

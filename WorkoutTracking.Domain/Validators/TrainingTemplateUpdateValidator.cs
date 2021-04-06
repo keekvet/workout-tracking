@@ -14,12 +14,16 @@ namespace WorkoutTracking.Application.Validators
         {
             RuleFor(t => t.Id)
                 .NotNull()
-                .NotEqual(0);
+                .NotEmpty();
+            
             RuleFor(t => t.CategoryId)
-                .NotNull();
-            RuleFor(t => t.Name)
                 .NotNull()
                 .NotEmpty();
+
+            RuleFor(t => t.Name)
+                .NotNull()
+                .NotEmpty()
+                .MaximumLength(50);
         }
     }
 }

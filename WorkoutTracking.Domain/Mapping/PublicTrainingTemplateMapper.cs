@@ -19,7 +19,8 @@ namespace WorkoutTracking.Application.Mapping
                 .ForMember(p => p.Name, opt => opt.MapFrom(p => p.Template.Name))
                 .ForMember(p => p.Description, opt => opt.MapFrom(p => p.Template.Description))
                 .ForMember(p => p.CreatorId, opt => opt.MapFrom(p => p.Template.CreatorId))
-                .ForMember(p => p.CategoryId, opt => opt.MapFrom(p => p.Template.CategoryId));
+                .ForMember(p => p.CategoryId, opt => opt.MapFrom(p => p.Template.CategoryId))
+                .ForMember(p => p.Exercises, opt => opt.MapFrom(p => p.Template.Exercises));
         }
     }
 }

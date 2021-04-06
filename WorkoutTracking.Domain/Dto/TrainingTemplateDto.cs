@@ -13,5 +13,6 @@ namespace WorkoutTracking.Application.Dto
         public string Description { get; set; }
         public int CreatorId { get; set; }
         public int CategoryId { get; set; }
+        public ICollection<ExerciseDto> Exercises { get; set; }
     }
 }

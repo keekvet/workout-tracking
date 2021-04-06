@@ -59,6 +59,7 @@ namespace Workout_tracking.ServiceExtention
             services.AddScoped<IRepository<TrainingCategory>, Repository<TrainingCategory>>();
             services.AddScoped<IRepository<TrainingTemplate>, Repository<TrainingTemplate>>();
             services.AddScoped<IRepository<PublicTrainingTemplate>, Repository<PublicTrainingTemplate>>();
+            services.AddScoped<IRepository<Exercise>, Repository<Exercise>>();
             #endregion
 
             return services;

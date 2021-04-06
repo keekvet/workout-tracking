@@ -132,11 +132,25 @@ namespace WorkoutTracking.Application.Services.Implementations
             if (template is null || user is null)
                 return null;
 
-            template = template.Clone();
-            template.CreatorId = userId;
+            TrainingTemplate templateClone = template.Clone();
+            templateClone.CreatorId = userId;
 
-            return await AddTrainingTemplateAsync(mapper.Map<TrainingTemplate, TrainingTemplateModel>(template),
-                                                  userId);
+            TrainingTemplateDto templateDto = await AddTrainingTemplateAsync(
+                mapper.Map<TrainingTemplate, TrainingTemplateModel>(templateClone), userId);
+
+            if (templateDto is null)
+                return null;
+
+            templateClone = await traingingTemplateRepository.GetByIdAsync(templateDto.Id);
+
+            List<Exercise> clonedExercises = template.Exercises.Select(e => e.Clone()).ToList();
+
+            templateClone.Exercises = clonedExercises;
+
+            templateClone = await traingingTemplateRepository.UpdateAsync(templateClone);
+            await traingingTemplateRepository.SaveChangesAsync();
+
+            return mapper.Map<TrainingTemplate, TrainingTemplateDto>(templateClone);
         }
     }
 }

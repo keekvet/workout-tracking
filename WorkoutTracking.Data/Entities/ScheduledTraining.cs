@@ -9,7 +9,6 @@ namespace WorkoutTracking.Data.Entities
     public class ScheduledTraining
     {
         public int Id { get; set; }
-        public string Note { get; set; }
         public DayOfWeek Day { get; set; }
         public TimeSpan StartTime { get; set; }
         public int TrainingTemplateId { get; set; }

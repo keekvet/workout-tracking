@@ -14,7 +14,17 @@ namespace WorkoutTracking.Application.Validators
     {
         public FriendRequestStateUpdateValidator()
         {
-            RuleFor(f => f.State).NotNull().NotEqual(FriendRequestState.Undefined);
+            RuleFor(f => f.State)
+                .NotNull()
+                .NotEqual(FriendRequestState.Undefined);
+
+            RuleFor(f => f.SenderId)
+                .NotNull()
+                .NotEmpty();
+
+            RuleFor(f => f.ReceiverId)
+                .NotNull()
+                .NotEmpty();
         }
     }
 }
