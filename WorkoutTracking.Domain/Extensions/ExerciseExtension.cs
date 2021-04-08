@@ -23,6 +23,7 @@ namespace WorkoutTracking.Application.Extensions
                 Name = exercise.Name,
                 Note = exercise.Note,
                 Position = exercise.Position,
+                Properties = exercise.Properties.Select(p => p.Clone()).ToList()
             };
         }
     }

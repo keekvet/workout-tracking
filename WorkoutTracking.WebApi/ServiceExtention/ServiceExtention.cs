@@ -22,17 +22,28 @@ namespace Workout_tracking.ServiceExtention
             #region services
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IRegisterService, RegisterService>();
+            
             services.AddScoped<IEncryptionService, EncryptionService>();
-            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IJwtService, JwtService>();
+
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserResolverService, UserResolverService>();
+
             services.AddScoped<IFollowingService, FollowingService>();
             services.AddScoped<IFriendService, FriendService>();
             services.AddScoped<IFriendRequestService, FriendRequestService>();
+
             services.AddScoped<ITrainingCategoryService, TrainingCategoryService>();
-            services.AddScoped<ITrainingTemplateService, TrainingTemplateService>();
             services.AddScoped<IPublicTrainingTemplateService, PublicTrainingTemplateService>();
+            services.AddScoped<IScheduledTrainingService, ScheduledTrainingService>();
+
+            services.AddScoped<ITrainingTemplateService, TrainingTemplateService>();
             services.AddScoped<IExerciseService, ExerciseService>();
+            services.AddScoped<IExercisePropertyService, ExercisePropertyService>();
+
+            services.AddScoped<ITrainingHistoryService, TrainingHistoryService>();
+            services.AddScoped<IExerciseHistoryService, ExerciseHistoryService>();
+            services.AddScoped<IExercisePropertyHistoryService, ExercisePropertyHistoryService>();
             #endregion
 
             #region pagination services
@@ -56,10 +67,18 @@ namespace Workout_tracking.ServiceExtention
             #region repositories
             services.AddScoped<IRepository<User>, Repository<User>>();
             services.AddScoped<IRepository<FriendRequest>, Repository<FriendRequest>>();
+           
             services.AddScoped<IRepository<TrainingCategory>, Repository<TrainingCategory>>();
-            services.AddScoped<IRepository<TrainingTemplate>, Repository<TrainingTemplate>>();
             services.AddScoped<IRepository<PublicTrainingTemplate>, Repository<PublicTrainingTemplate>>();
+            services.AddScoped<IRepository<ScheduledTraining>, Repository<ScheduledTraining>>();
+            
+            services.AddScoped<IRepository<TrainingTemplate>, Repository<TrainingTemplate>>();
             services.AddScoped<IRepository<Exercise>, Repository<Exercise>>();
+            services.AddScoped<IRepository<ExerciseProperty>, Repository<ExerciseProperty>>();
+
+            services.AddScoped<IRepository<TrainingHistory>, Repository<TrainingHistory>>();
+            services.AddScoped<IRepository<ExerciseHistory>, Repository<ExerciseHistory>>();
+            services.AddScoped<IRepository<ExercisePropertyHistory>, Repository<ExercisePropertyHistory>>();
             #endregion
 
             return services;

@@ -16,6 +16,7 @@ namespace WorkoutTracking.Data.Entities
         public string Jwt { get; set; }
         public string About { get; set; }
         public UserAccess Access { get; set; }
+        public virtual TrainingTemplate ActiveTraining { get; set; }
         public virtual ICollection<User> FriendsTo { get; set; } = new List<User>();
         public virtual ICollection<User> FriendsFrom { get; set; } = new List<User>();
         public virtual ICollection<FriendRequest> SendedFriendRequests { get; set; } = new List<FriendRequest>();

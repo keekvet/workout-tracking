@@ -13,7 +13,8 @@ namespace WorkoutTracking.Data.EntitiesConfigurations
     {
         public void Configure(EntityTypeBuilder<TrainingHistory> builder)
         {
-            builder.Property(t => t.Start).IsRequired();
+            builder.Property(t => t.Name).HasMaxLength(50).IsRequired();
+            builder.Property(t => t.Description).HasMaxLength(500);
 
             builder
                 .HasOne(t => t.User)
