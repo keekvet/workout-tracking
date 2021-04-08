@@ -33,5 +33,13 @@ namespace WorkoutTracking.Application.ValidationExtentions
                 .Matches(@"^\w{4,20}$");
 
         }
+
+        public static IRuleBuilderOptions<T, string> TimeTemplate<T>(this IRuleBuilder<T, string> ruleBuilder)
+        {
+            return ruleBuilder
+                .NotNull()
+                .Matches(@"[0-2]\d:[0-5]\d");
+
+        }
     }
 }

@@ -23,7 +23,7 @@
 13. restrict number of exercises per training +
 14. restrict numver of properties per exercise +
 15. add update restriction filter when training is in progress
-16. clone Exercise properties on template clone
+16. clone Exercise properties on template clone +
 
 
 
@@ -42,5 +42,3 @@ ACTIVE
 14. restrict number of properties per exercise
 
 15. add update restriction filter when training is in progress
-
-16. clone Exercise properties on template clone

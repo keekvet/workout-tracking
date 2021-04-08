@@ -9,11 +9,13 @@ namespace WorkoutTracking.Application.Extensions
 {
     public static class ExerciseExtension
     {
-        public static void Copy(this Exercise exercise, Exercise exerciseToCopy)
+        public static Exercise Copy(this Exercise exercise, Exercise exerciseToCopy)
         {
             exercise.Name = exerciseToCopy.Name;
             exercise.Note = exerciseToCopy.Note;
             exercise.Position = exerciseToCopy.Position;
+
+            return exercise;
         }
 
         public static Exercise Clone(this Exercise exercise)

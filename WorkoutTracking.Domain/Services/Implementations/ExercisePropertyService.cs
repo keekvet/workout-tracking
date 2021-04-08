@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Extensions;
 using WorkoutTracking.Application.Models.ExerciseProperty;
 using WorkoutTracking.Application.Services.Interfaces;
 using WorkoutTracking.Data.Entities;
@@ -40,7 +41,12 @@ namespace WorkoutTracking.Application.Services.Implementations
                 return null;
 
             if (exerciseProperty.Id != 0)
+            {
+                exerciseProperty =
+                    exercise.Properties.FirstOrDefault(p => p.Id == exerciseProperty.Id).Copy(exerciseProperty);
+
                 exerciseProperty = await exercisePropertyRepository.UpdateAsync(exerciseProperty);
+            }
             else
                 exerciseProperty = await exercisePropertyRepository.AddAsync(exerciseProperty);
 

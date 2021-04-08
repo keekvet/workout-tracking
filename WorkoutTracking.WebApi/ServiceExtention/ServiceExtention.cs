@@ -62,6 +62,12 @@ namespace Workout_tracking.ServiceExtention
             services.AddScoped<
                 IPaginationService<PublicTrainingTemplate, PublicTrainingTemplateDto>,
                 PaginationService<PublicTrainingTemplate, PublicTrainingTemplateDto>>();
+            services.AddScoped<
+                IPaginationService<ScheduledTraining, ScheduledTrainingDto>,
+                PaginationService<ScheduledTraining, ScheduledTrainingDto>>();
+            services.AddScoped<
+                IPaginationService<TrainingHistory, TrainingHistoryDto>,
+                PaginationService<TrainingHistory, TrainingHistoryDto>>();
             #endregion
 
             #region repositories
