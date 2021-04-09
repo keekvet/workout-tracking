@@ -1,22 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkoutTracking.Application.Models.Pagination.Base;
 using WorkoutTracking.Application.Services.Interfaces;
 
 namespace Workout_tracking.Controllers
 {
-
+    [Authorize]
     [ApiController]
     [Route("api/training-history")]
-    public class TrainingHistoryContorller : ControllerBase
+    public class TrainingHistoryController : ControllerBase
     {
         private readonly IUserResolverService userResolverService;
         private readonly ITrainingHistoryService trainingHistoryService;
 
-        public TrainingHistoryContorller(
+        public TrainingHistoryController(
             IUserResolverService userResolverService, 
             ITrainingHistoryService trainingHistoryService)
         {
@@ -25,15 +27,9 @@ namespace Workout_tracking.Controllers
         }
 
         [HttpGet("all")]
-        public async Task<IActionResult> GetHistory()
+        public async Task<IActionResult> GetHistory([FromQuery]SortedPaginationModel model)
         {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("id/{historyId}")]
-        public async Task<IActionResult> GetHistoryById(int historyId)
-        {
-            throw new NotImplementedException();
+            return Ok(await trainingHistoryService.GetAllTrainingHistoriesAsync(model));
         }
     }
 }

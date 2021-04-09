@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkoutTracking.Application.Dto.Training;
 
-namespace WorkoutTracking.Application.Dto
+namespace WorkoutTracking.Application.Dto.TrainingExtra
 {
     public class PublicTrainingTemplateDto
     {
@@ -14,6 +15,6 @@ namespace WorkoutTracking.Application.Dto
         public string Description { get; set; }
         public int CreatorId { get; set; }
         public int CategoryId { get; set; }
-        public ICollection<ExerciseDto> Exercises { get; set; }
+        public IEnumerable<ExerciseDto> Exercises { get; set; }
     }
 }

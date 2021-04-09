@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WorkoutTracking.Application.Dto
+namespace WorkoutTracking.Application.Dto.TrainingExtra
 {
     public class TrainingCategoryDto
     {

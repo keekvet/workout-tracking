@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WorkoutTracking.Application.Dto
+namespace WorkoutTracking.Application.Dto.User
 {
-    public class ExerciseHistoryDto
+    public class UserTokenDto : UserDto
     {
-        
+        public string Jwt { get; set; }
     }
 }

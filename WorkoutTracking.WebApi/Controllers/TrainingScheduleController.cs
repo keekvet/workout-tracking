@@ -5,11 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Dto.TrainingExtra;
 using WorkoutTracking.Application.Models.Pagination.Base;
 using WorkoutTracking.Application.Models.ScheduledTraining;
 using WorkoutTracking.Application.Services.Interfaces;
-using WorkoutTracking.Data.Entities;
 
 namespace Workout_tracking.Controllers
 {
@@ -18,8 +17,8 @@ namespace Workout_tracking.Controllers
     [Route("api/training-schedule")]
     public class TrainingScheduleController : ControllerBase
     {
-        IUserResolverService userResolverService;
-        IScheduledTrainingService scheduledTrainingService;
+        private readonly IUserResolverService userResolverService;
+        private readonly IScheduledTrainingService scheduledTrainingService;
 
         public TrainingScheduleController(
             IUserResolverService userResolverService, 

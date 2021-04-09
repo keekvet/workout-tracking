@@ -10,9 +10,10 @@ namespace WorkoutTracking.Data.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
         public int UserId { get; set; }
+        public DateTime Start { get; set; }
         public virtual User User { get; set; }
+        public virtual ActiveTraining ActiveTraining { get; set; }
         public virtual ICollection<ExerciseHistory> ExerciseHistory{ get; set; } = new List<ExerciseHistory>();
     }
 }

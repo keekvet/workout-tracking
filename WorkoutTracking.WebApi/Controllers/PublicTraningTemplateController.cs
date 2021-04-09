@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Dto.Training;
+using WorkoutTracking.Application.Dto.TrainingExtra;
 using WorkoutTracking.Application.Models.Pagination;
 using WorkoutTracking.Application.Services.Interfaces;
 

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Dto.User;
 using WorkoutTracking.Application.Models;
 using WorkoutTracking.Application.Models.FriendRequest;
 using WorkoutTracking.Application.Models.Pagination.Base;
@@ -15,8 +16,8 @@ using WorkoutTracking.Data.Enums;
 namespace Workout_tracking.Controllers
 {
     [Authorize]
-    [Route("api/friend-request")]
     [ApiController]
+    [Route("api/friend-request")]
     public class FriendRequestController : ControllerBase
     {
         private readonly IUserResolverService userResolverService;

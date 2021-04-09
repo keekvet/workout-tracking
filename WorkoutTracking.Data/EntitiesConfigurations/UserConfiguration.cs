@@ -33,8 +33,6 @@ namespace WorkoutTracking.Data.EntitiesConfigurations
                 .WithMany(u => u.Following)
                 .UsingEntity(x => x.ToTable("UserFollowers"));
 
-            builder
-                .HasOne(u => u.ActiveTraining);
         }
     }
 }

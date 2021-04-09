@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Dto.Training;
 using WorkoutTracking.Application.Extensions;
 using WorkoutTracking.Application.Models.Pagination.Base;
 using WorkoutTracking.Application.Models.TrainingTemplate;
@@ -38,7 +39,7 @@ namespace WorkoutTracking.Application.Services.Implementations
 
         private async Task<TrainingTemplateDto> UpsertTrainingTemplateAsync(TrainingTemplateUpdateModel model, int userId)
         {
-            if (await trainingCategoryService.GetCategoryById(model.CategoryId) is null)
+            if (await trainingCategoryService.GetCategoryByIdAsync(model.CategoryId) is null)
                 return null;
 
             TrainingTemplate trainingTemplate;
@@ -106,7 +107,7 @@ namespace WorkoutTracking.Application.Services.Implementations
             return true;
         }
 
-        public async Task<TrainingTemplateDto> GetTrainingTemplateById(int templateId, int userId)
+        public async Task<TrainingTemplateDto> GetTrainingTemplateByIdAsync(int templateId, int userId)
         {
             TrainingTemplate template = await traingingTemplateRepository.GetByIdAsync(templateId);
 

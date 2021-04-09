@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Dto.Training;
 using WorkoutTracking.Application.Extensions;
 using WorkoutTracking.Application.Models.Exercise;
 using WorkoutTracking.Application.Services.Interfaces;
@@ -62,7 +63,7 @@ namespace WorkoutTracking.Application.Services.Implementations
                 
             return result;
         }
-
+        
         private async Task<ExerciseDto> UpsertExerciseAsync(Exercise exercise, int userId)
         {
             if (exercise is null)

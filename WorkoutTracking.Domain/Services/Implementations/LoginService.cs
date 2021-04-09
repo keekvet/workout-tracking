@@ -11,6 +11,7 @@ using WorkoutTracking.Application.Models;
 using WorkoutTracking.Application.Models.User;
 using WorkoutTracking.Application.Services.Interfaces;
 using System.Security.Authentication;
+using WorkoutTracking.Application.Dto.User;
 
 namespace WorkoutTracking.Application.Services.Implementations
 {

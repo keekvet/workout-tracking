@@ -14,6 +14,7 @@ namespace WorkoutTracking.Data.Entities
         public int CreatorId { get; set; }
         public virtual User Creator { get; set; }
         public int CategoryId { get; set; }
+        public virtual ActiveTraining ActiveTraining { get; set; }
         public virtual TrainingCategory Category { get; set; }
         public virtual PublicTrainingTemplate publicTraining { get; set; }
         public virtual ICollection<Exercise> Exercises { get; set; } = new List<Exercise>();

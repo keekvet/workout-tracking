@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WorkoutTracking.Application.Dto
+namespace WorkoutTracking.Application.Dto.Training
 {
     public class ExerciseDto
     {
@@ -13,6 +13,6 @@ namespace WorkoutTracking.Application.Dto
         public string Note { get; set; }
         public int Position { get; set; }
         public int TrainingTemplateId { get; set; }
-        public ICollection<ExercisePropertyDto> Properties { get; set; }
+        public IEnumerable<ExercisePropertyDto> Properties { get; set; }
     }
 }

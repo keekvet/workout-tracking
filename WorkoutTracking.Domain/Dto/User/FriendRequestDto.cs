@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Data.Enums;
 
-namespace WorkoutTracking.Application.Dto
+namespace WorkoutTracking.Application.Dto.User
 {
     public class FriendRequestDto
     {

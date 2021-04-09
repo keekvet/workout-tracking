@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WorkoutTracking.Data.Entities;
 using WorkoutTracking.Application.Dto;
 using WorkoutTracking.Application.Models.User;
+using WorkoutTracking.Application.Dto.User;
 
 namespace WorkoutTracking.Application.Services.Interfaces
 {

@@ -6,6 +6,8 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Dto.Training;
+using WorkoutTracking.Application.Dto.TrainingExtra;
 using WorkoutTracking.Application.Models.Pagination.Base;
 using WorkoutTracking.Application.Models.ScheduledTraining;
 using WorkoutTracking.Application.Services.Interfaces;
@@ -56,7 +58,7 @@ namespace WorkoutTracking.Application.Services.Implementations
         public async Task<ScheduledTrainingDto> AddScheduledTraining(ScheduledTrainingModel model, int userId)
         {
             TrainingTemplateDto trainingTemplate = 
-                await trainingTemplateService.GetTrainingTemplateById(model.TemplateId, userId);
+                await trainingTemplateService.GetTrainingTemplateByIdAsync(model.TemplateId, userId);
 
             if (trainingTemplate is null)
                 return null;

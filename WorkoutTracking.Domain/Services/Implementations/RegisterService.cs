@@ -12,6 +12,7 @@ using WorkoutTracking.Application.Models.User;
 using WorkoutTracking.Application.Services.Interfaces;
 using System.Security.Authentication;
 using System.Text.RegularExpressions;
+using WorkoutTracking.Application.Dto.User;
 
 namespace WorkoutTracking.Application.Services.Implementations
 {

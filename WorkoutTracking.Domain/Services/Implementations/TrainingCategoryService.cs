@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Dto.TrainingExtra;
 using WorkoutTracking.Application.Models.Pagination.Base;
 using WorkoutTracking.Application.Services.Interfaces;
 using WorkoutTracking.Data.Entities;
@@ -33,7 +34,7 @@ namespace WorkoutTracking.Application.Services.Implementations
             return await paginationService.GetRangeAsync(model);
         }
 
-        public async Task<TrainingCategoryDto> GetCategoryById(int id)
+        public async Task<TrainingCategoryDto> GetCategoryByIdAsync(int id)
         {
             return mapper.Map<TrainingCategory, TrainingCategoryDto>(await trainingRepository.GetByIdAsync(id));
         }

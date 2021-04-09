@@ -16,6 +16,7 @@ namespace WorkoutTracking.Data.EntitiesConfigurations
         public void Configure(EntityTypeBuilder<ExercisePropertyHistory> builder)
         {
             builder.Property(e => e.Duration).IsRequired();
+            builder.Property(e => e.DurationType).IsRequired();
 
             builder
                 .HasOne(e => e.ExerciseHistory)

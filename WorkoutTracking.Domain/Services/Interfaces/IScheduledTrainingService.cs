@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Dto.TrainingExtra;
 using WorkoutTracking.Application.Models.Pagination.Base;
 using WorkoutTracking.Application.Models.ScheduledTraining;
 

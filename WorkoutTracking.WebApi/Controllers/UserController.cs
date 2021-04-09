@@ -14,6 +14,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using WorkoutTracking.Application.Dto;
 using Workout_tracking.Filters;
+using WorkoutTracking.Application.Dto.User;
 
 namespace Workout_tracking.Controllers
 {

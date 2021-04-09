@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Dto.TrainingExtra;
 using WorkoutTracking.Data.Entities;
 
-namespace WorkoutTracking.Application.Mapping
+namespace WorkoutTracking.Application.Mapping.TrainingExtra
 {
     public class PublicTrainingTemplateMapper : Profile
     {

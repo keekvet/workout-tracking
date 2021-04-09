@@ -15,6 +15,7 @@ using WorkoutTracking.Application.Models.Pagination;
 using System.Linq.Expressions;
 using WorkoutTracking.Application.Models.User;
 using System.Security.Authentication;
+using WorkoutTracking.Application.Dto.User;
 
 namespace WorkoutTracking.Application.Services.Implementations
 {

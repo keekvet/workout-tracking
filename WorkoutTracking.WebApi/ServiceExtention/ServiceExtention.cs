@@ -12,6 +12,10 @@ using WorkoutTracking.Application.ConfigurationTemplates;
 using WorkoutTracking.Application.Services.Implementations;
 using WorkoutTracking.Application.Services.Interfaces;
 using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Dto.User;
+using WorkoutTracking.Application.Dto.TrainingExtra;
+using WorkoutTracking.Application.Dto.Training;
+using WorkoutTracking.Application.Dto.TrainingHistory;
 
 namespace Workout_tracking.ServiceExtention
 {
@@ -33,6 +37,7 @@ namespace Workout_tracking.ServiceExtention
             services.AddScoped<IFriendService, FriendService>();
             services.AddScoped<IFriendRequestService, FriendRequestService>();
 
+            services.AddScoped<IActiveTrainingService, ActiveTrainingService>();
             services.AddScoped<ITrainingCategoryService, TrainingCategoryService>();
             services.AddScoped<IPublicTrainingTemplateService, PublicTrainingTemplateService>();
             services.AddScoped<IScheduledTrainingService, ScheduledTrainingService>();
@@ -43,7 +48,6 @@ namespace Workout_tracking.ServiceExtention
 
             services.AddScoped<ITrainingHistoryService, TrainingHistoryService>();
             services.AddScoped<IExerciseHistoryService, ExerciseHistoryService>();
-            services.AddScoped<IExercisePropertyHistoryService, ExercisePropertyHistoryService>();
             #endregion
 
             #region pagination services
@@ -74,6 +78,7 @@ namespace Workout_tracking.ServiceExtention
             services.AddScoped<IRepository<User>, Repository<User>>();
             services.AddScoped<IRepository<FriendRequest>, Repository<FriendRequest>>();
            
+            services.AddScoped<IRepository<ActiveTraining>, Repository<ActiveTraining>>();
             services.AddScoped<IRepository<TrainingCategory>, Repository<TrainingCategory>>();
             services.AddScoped<IRepository<PublicTrainingTemplate>, Repository<PublicTrainingTemplate>>();
             services.AddScoped<IRepository<ScheduledTraining>, Repository<ScheduledTraining>>();

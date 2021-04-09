@@ -24,7 +24,10 @@
 14. restrict numver of properties per exercise +
 15. add update restriction filter when training is in progress
 16. clone Exercise properties on template clone +
-
+17. create training history +
+18. start training when exercises in training template >= 1 + 
+19. remove method GetUserByIdAsync 
+20. edit controllers to return badRequest on null
 
 
 
@@ -42,3 +45,7 @@ ACTIVE
 14. restrict number of properties per exercise
 
 15. add update restriction filter when training is in progress
+
+19. remove method GetUserByIdAsync
+
+20. edit controllers to return badRequest on null

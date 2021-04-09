@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracking.Application.Dto;
+using WorkoutTracking.Application.Dto.Training;
 using WorkoutTracking.Application.Models.Pagination.Base;
 using WorkoutTracking.Application.Models.TrainingTemplate;
 using WorkoutTracking.Application.Services.Interfaces;
@@ -38,7 +39,7 @@ namespace Workout_tracking.Controllers
         [HttpGet("id/{id}")]
         public async Task<IActionResult> GetTrainingTemplateAsync([FromQuery] int id)
         {
-            return Ok(await trainingTemplateService.GetTrainingTemplateById(id, userResolverService.GetUserId()));
+            return Ok(await trainingTemplateService.GetTrainingTemplateByIdAsync(id, userResolverService.GetUserId()));
         }
 
         [HttpPost("add")]

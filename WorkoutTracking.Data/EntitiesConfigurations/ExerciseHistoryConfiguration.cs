@@ -13,8 +13,11 @@ namespace WorkoutTracking.Data.EntitiesConfigurations
     {
         public void Configure(EntityTypeBuilder<ExerciseHistory> builder)
         {
-            builder.Property(e => e.Start).IsRequired();
 
+            builder.Property(e => e.Name).IsRequired();
+
+            builder.Property(e => e.EndDate).IsRequired();
+            
             builder
                 .HasOne(e => e.TrainingHistory)
                 .WithMany(t => t.ExerciseHistory)

@@ -10,6 +10,7 @@ using WorkoutTracking.Application.Dto;
 using WorkoutTracking.Application.Models.Pagination;
 using System.Linq.Expressions;
 using AutoMapper;
+using WorkoutTracking.Application.Dto.User;
 
 namespace WorkoutTracking.Application.Services.Implementations
 {
