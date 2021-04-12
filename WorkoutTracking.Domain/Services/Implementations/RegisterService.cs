@@ -43,7 +43,7 @@ namespace WorkoutTracking.Application.Services.Implementations
             UserDto foundUser = await userService.GetUserByNameAsync(userModel.Name);
 
             if (foundUser is not null)
-                throw new InvalidCredentialException("User with this name already exist");
+                throw new InvalidCredentialException("user with this name already exist");
 
             HashedPassword passwordHash = await encryptionService.EncryptAsync(
                Encoding.UTF8.GetBytes(userModel.Password));

@@ -36,19 +36,28 @@ namespace Workout_tracking.Controllers
         [HttpGet("{name}")]
         public async Task<IActionResult> GetUserByNameAsync(string name)
         {
-            return Ok(await userService.GetUserByNameAsync(name));
+            UserDto user = await userService.GetUserByNameAsync(name, userResolverService.GetUserId());
+            if (user is null)
+                return BadRequest();
+            return Ok(user);
         }
 
         [HttpGet("id/{id}")]
-        public async Task<IActionResult> GetUserByNameAsync(int id)
+        public async Task<IActionResult> GetUserByIdAsync(int id)
         {
-            return Ok(await userService.GetUserByIdAsync(id));
+            UserDto user = await userService.GetUserByIdAsync(id, userResolverService.GetUserId());
+            if (user is null)
+                return BadRequest();
+            return Ok(user);
         }
 
         [HttpGet("search")]
         public async Task<IActionResult> SearchUsersAsync([FromQuery] UserSearchPaginationModel userSearchModel)
         {
-            return Ok(await userService.GetUsersWithNameAsync(userSearchModel));
+            IEnumerable<UserDto> users = await userService.GetUsersWithNameAsync(userSearchModel);
+            if (users is null)
+                return BadRequest();
+            return Ok(users);
         }
 
         [HttpPut("update")]

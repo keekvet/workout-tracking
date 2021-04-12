@@ -21,7 +21,7 @@ namespace Workout_tracking.Filters
             else if(exception is InvalidCredentialException)
                 context.HttpContext.Response.StatusCode = 401;
 
-            context.Result = new ObjectResult(new { message = exception.Message });
+            context.Result = new ObjectResult(new { Message = exception.Message });
         }
     }
 }

@@ -22,5 +22,7 @@ namespace WorkoutTracking.Application.Services.Interfaces
         Task<IEnumerable<UserDto>> GetUsersWithNameAsync(UserSearchPaginationModel model);
         Task<UserDto> UpdateUserAsync(UserUpdateModel userUpdateModel, int userId);
         Task<bool> UpdatePasswordAsync(PasswordUpdateModel updatePasswordModel, int userId);
+        Task<UserDto> GetUserByNameAsync(string name, int userId);
+        Task<UserDto> GetUserByIdAsync(int id, int userId);
     }
 }

@@ -28,6 +28,8 @@
 18. start training when exercises in training template >= 1 + 
 19. remove method GetUserByIdAsync 
 20. edit controllers to return badRequest on null
+21. edit authorization filter +
+22. restrict number of scheduled training
 
 
 
@@ -49,3 +51,5 @@ ACTIVE
 19. remove method GetUserByIdAsync
 
 20. edit controllers to return badRequest on null
+
+22. restrict number of scheduled training

@@ -45,9 +45,24 @@ namespace WorkoutTracking.Application.Services.Implementations
             return result;
         }
 
+        public async Task<UserDto> GetUserByIdAsync(int id, int userId)
+        {
+            if ((await userRepository.GetByIdAsync(userId)) is null)
+                return null;
+
+            return mapper.Map<User, UserDto>(await userRepository.GetByIdAsync(id));
+        }
+
         public async Task<UserDto> GetUserByIdAsync(int id)
         {
             return mapper.Map<User, UserDto>(await userRepository.GetByIdAsync(id));
+        }
+        public async Task<UserDto> GetUserByNameAsync(string name, int userId)
+        {
+            if ((await userRepository.GetByIdAsync(userId)) is null)
+                return null;
+
+            return mapper.Map<User, UserDto>(await GetUserEntityByNameAsync(name));
         }
 
         public async Task<UserDto> GetUserByNameAsync(string name)
@@ -101,13 +116,10 @@ namespace WorkoutTracking.Application.Services.Implementations
         {
             User user = await userRepository.GetByIdAsync(userId);
 
-            if (user is null)
+            if (user is null 
+                || !await encryptionService.PasswordEqualsHashAsync(
+                    updatePasswordModel.CurrentPassword, user.PasswordHash, user.Salt))
                 return false;
-
-            if (!await encryptionService.PasswordEqualsHashAsync(
-                updatePasswordModel.CurrentPassword, 
-                user.PasswordHash, user.Salt))
-                throw new InvalidCredentialException("wrong password");
 
             HashedPassword newHashedPassword = await encryptionService.EncryptAsync(
                 Encoding.UTF8.GetBytes(updatePasswordModel.NewPassword));
