@@ -66,13 +66,22 @@ namespace Workout_tracking.Controllers
         [HttpGet("input")]
         public async Task<IActionResult> GetInputRequestsAsync([FromQuery] SortedPaginationModel model)
         {
-            return Ok(await friendRequestService.GetInputFriendRequestsAsync(model, userResolverService.GetUserId()));
+            IEnumerable<FriendRequestDto> result =
+                await friendRequestService.GetInputFriendRequestsAsync(model, userResolverService.GetUserId());
+            if (result is null)
+                return BadRequest();
+            return Ok(result);
         }
-    
+
         [HttpGet("output")]
         public async Task<IActionResult> GetOutputRequestsAsync([FromQuery] SortedPaginationModel model)
         {
-            return Ok(await friendRequestService.GetOutputFriendRequestsAsync(model, userResolverService.GetUserId()));
+            IEnumerable<FriendRequestDto> result =
+                await friendRequestService.GetOutputFriendRequestsAsync(model, userResolverService.GetUserId());
+
+            if (result is null)
+                return BadRequest();
+            return Ok(result);
         }
     }
 }

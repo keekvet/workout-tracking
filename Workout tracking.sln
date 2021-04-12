@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkoutTracking.Application
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkoutTracking.WebApi", "WorkoutTracking.WebApi\WorkoutTracking.WebApi.csproj", "{633230FF-3991-4E68-B7B7-3954FA4ADE0B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Workout-tracking-models", "..\Workout-tracking-models\Workout-tracking-models\Workout-tracking-models.csproj", "{94B78EBB-0B59-4C8B-8528-5EB01A8CB774}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{633230FF-3991-4E68-B7B7-3954FA4ADE0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{633230FF-3991-4E68-B7B7-3954FA4ADE0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{633230FF-3991-4E68-B7B7-3954FA4ADE0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94B78EBB-0B59-4C8B-8528-5EB01A8CB774}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94B78EBB-0B59-4C8B-8528-5EB01A8CB774}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94B78EBB-0B59-4C8B-8528-5EB01A8CB774}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94B78EBB-0B59-4C8B-8528-5EB01A8CB774}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

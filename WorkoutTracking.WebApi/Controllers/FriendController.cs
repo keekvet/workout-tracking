@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WorkoutTracking.Application.Dto.User;
 using WorkoutTracking.Application.Models.Pagination;
 using WorkoutTracking.Application.Services.Interfaces;
 
@@ -35,7 +36,10 @@ namespace Workout_tracking.Controllers
         [HttpGet("all")]
         public async Task<IActionResult> GetFriendsAsync([FromQuery] FriendPaginationModel model)
         {
-            return Ok(await friendService.GetFriendsAsync(model));
+            IEnumerable<UserDto> result = await friendService.GetFriendsAsync(model);
+            if (result is null)
+                return BadRequest();
+            return Ok(result);
         }
     }
 }

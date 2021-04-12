@@ -67,7 +67,11 @@ namespace Workout_tracking.Controllers
         public async Task<IActionResult> GetPublicTemplatesAsync(
             [FromQuery] PublicTrainingTemplatePaginationModel model)
         {
-            return Ok(await publicTraningService.GetPublicTemplatesAsync(model));
+            IEnumerable<PublicTrainingTemplateDto> result =
+                await publicTraningService.GetPublicTemplatesAsync(model);
+            if (result is null)
+                return BadRequest();
+            return Ok(result);
         }
 
         [HttpGet("user/{userId}")]
@@ -75,7 +79,11 @@ namespace Workout_tracking.Controllers
             [FromQuery] PublicTrainingTemplatePaginationModel model, 
             int userId)
         {
-            return Ok(await publicTraningService.GetPublicTemplatesAsync(model, userId));
+            IEnumerable<PublicTrainingTemplateDto> result =
+                await publicTraningService.GetPublicTemplatesAsync(model, userId);
+            if (result is null)
+                return BadRequest();
+            return Ok(result);
         }
 
 

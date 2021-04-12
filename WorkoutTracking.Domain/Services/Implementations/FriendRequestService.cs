@@ -105,16 +105,21 @@ namespace WorkoutTracking.Application.Services.Implementations
             FriendRequest friendRequest =
                 await friendRequestRepository.GetByIdAsync(model.SenderId, receiverId);
 
-            if (friendRequest is null || !friendRequest.RequestToId.Equals(receiverId))
+            FriendRequestState tmp;
+
+            if (friendRequest is null 
+                || !friendRequest.RequestToId.Equals(receiverId) 
+                || !Enum.TryParse(model.State, true, out tmp))
                 return null;
 
-            friendRequest.State = model.State;
+            friendRequest.State = tmp;
+
             friendRequest = await friendRequestRepository.UpdateAsync(friendRequest);
             await friendRequestRepository.SaveChangesAsync();
 
             bool makeFriendResult = false;
 
-            if (model.State is FriendRequestState.Accepted)
+            if (friendRequest.State is FriendRequestState.Accepted)
             {
                 makeFriendResult =
                     await friendService.MakeFriendsAsync(friendRequest.RequestFromId, friendRequest.RequestToId);

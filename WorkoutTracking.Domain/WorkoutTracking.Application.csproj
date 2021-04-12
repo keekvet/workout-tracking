@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Workout-tracking-models\Workout-tracking-models\Workout-tracking-models.csproj" />
     <ProjectReference Include="..\WorkoutTracking.Data\WorkoutTracking.Data.csproj" />
   </ItemGroup>
 

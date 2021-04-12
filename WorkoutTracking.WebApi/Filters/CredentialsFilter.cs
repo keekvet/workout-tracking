@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Authentication;
 using System.Text;
 using System.Threading.Tasks;
+using WorkoutTracking.Application.Dto.Error;
 
 namespace Workout_tracking.Filters
 {
@@ -21,7 +22,7 @@ namespace Workout_tracking.Filters
             else if(exception is InvalidCredentialException)
                 context.HttpContext.Response.StatusCode = 401;
 
-            context.Result = new ObjectResult(new { Message = exception.Message });
+            context.Result = new ObjectResult(new ErrorMessageDto() { Message = exception.Message });
         }
     }
 }

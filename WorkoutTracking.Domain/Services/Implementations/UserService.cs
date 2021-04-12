@@ -16,6 +16,7 @@ using System.Linq.Expressions;
 using WorkoutTracking.Application.Models.User;
 using System.Security.Authentication;
 using WorkoutTracking.Application.Dto.User;
+using WorkoutTracking.Data.Enums;
 
 namespace WorkoutTracking.Application.Services.Implementations
 {
@@ -95,8 +96,10 @@ namespace WorkoutTracking.Application.Services.Implementations
         public async Task<UserDto> UpdateUserAsync(UserUpdateModel userUpdateModel, int userId)
         {
             User user = await userRepository.GetByIdAsync(userId);
+            
+            UserAccess parseResult;
 
-            if (user is null)
+            if (user is null || !Enum.TryParse(userUpdateModel.Access, true, out parseResult))
                 return null;
 
             if (!user.Name.Equals(userUpdateModel.Name))
@@ -105,7 +108,7 @@ namespace WorkoutTracking.Application.Services.Implementations
 
             user.Name = userUpdateModel.Name;
             user.About = userUpdateModel.About;
-            user.Access = userUpdateModel.Access;
+            user.Access = parseResult;
 
             UserDto dto = mapper.Map<User, UserDto>(await userRepository.UpdateAsync(user));
             await userRepository.SaveChangesAsync();

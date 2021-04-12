@@ -53,19 +53,23 @@ namespace Workout_tracking.Controllers
         [HttpGet("all")]
         public async Task<IActionResult> GetAllTrainingSchedules([FromQuery]SortedPaginationModel model)
         {
-            return Ok(await scheduledTrainingService.GetAllScheduledTrainins(model, userResolverService.GetUserId()));
+            IEnumerable<ScheduledTrainingDto> result =
+                await scheduledTrainingService.GetAllScheduledTrainins(model, userResolverService.GetUserId());
+            if (result is null)
+                return BadRequest();
+            return Ok();
         }
 
         [HttpGet("id/{trainingId}")]
         public async Task<IActionResult> GetTrainingScheduleById(int trainingId)
         {
-            ScheduledTrainingDto scheduledTraining =
+            ScheduledTrainingDto result =
                 await scheduledTrainingService.GetScheduledTrainingById(trainingId, userResolverService.GetUserId());
 
-            if (scheduledTraining is null)
+            if (result is null)
                 return BadRequest();
 
-            return Ok(scheduledTraining);
+            return Ok(result);
         }
     }
 }

@@ -9,6 +9,7 @@ using Workout_tracking.Filters;
 using WorkoutTracking.Data.Entities;
 using WorkoutTracking.Application.Models.User;
 using WorkoutTracking.Application.Services.Interfaces;
+using WorkoutTracking.Application.Dto.User;
 
 namespace Workout_tracking.Controllers
 {
@@ -27,7 +28,10 @@ namespace Workout_tracking.Controllers
         [CredentialsFilter]
         public async Task<IActionResult> Login(UserLoginModel user)
         {
-            return Ok(await loginService.LoginAsync(user));
+            UserTokenDto result = await loginService.LoginAsync(user);
+            if (result is null)
+                return BadRequest();
+            return Ok(result);
         }
     }
 }

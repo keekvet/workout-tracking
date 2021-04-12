@@ -111,8 +111,9 @@ namespace WorkoutTracking.Application.Services.Implementations
         {
             TrainingTemplate template = await traingingTemplateRepository.GetByIdAsync(templateId);
 
-            if (!template.CreatorId.Equals(userId))
+            if (template?.CreatorId != userId)
                 return null;
+
             return mapper.Map<TrainingTemplate, TrainingTemplateDto>(template);
         }
         

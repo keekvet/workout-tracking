@@ -16,7 +16,7 @@ namespace WorkoutTracking.Application.Validators
         {
             RuleFor(f => f.State)
                 .NotNull()
-                .NotEqual(FriendRequestState.Undefined);
+                .NotEqual(Enum.GetName(FriendRequestState.Undefined));
 
             RuleFor(f => f.SenderId)
                 .NotNull()

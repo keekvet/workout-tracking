@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkoutTracking.Application.Dto.TrainingExtra;
 using WorkoutTracking.Application.Models.Pagination.Base;
 using WorkoutTracking.Application.Services.Interfaces;
 
@@ -25,7 +26,10 @@ namespace Workout_tracking.Controllers
         [HttpGet("all")]
         public async Task<IActionResult> GetCategoriesAll([FromQuery] SortedPaginationModel model)
         {
-            return Ok(await trainingCategoryService.GetAllAsync(model));
+            IEnumerable<TrainingCategoryDto> result = await trainingCategoryService.GetAllAsync(model);
+            if (result is null)
+                return BadRequest();
+            return Ok(result);
         }
     }
 }

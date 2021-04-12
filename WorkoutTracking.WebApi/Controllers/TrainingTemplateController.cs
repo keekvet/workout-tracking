@@ -32,14 +32,23 @@ namespace Workout_tracking.Controllers
         [HttpGet("all")]
         public async Task<IActionResult> GetTrainingTemplatesAsync([FromQuery] SortedPaginationModel model)
         {
-            return Ok(await trainingTemplateService
-                .GetTrainingTemplatesByUserIdAsync(model, userResolverService.GetUserId()));
+            IEnumerable<TrainingTemplateDto> result = await trainingTemplateService
+                .GetTrainingTemplatesByUserIdAsync(model, userResolverService.GetUserId());
+            
+            if (result is null)
+                return BadRequest();
+            return Ok(result);
         }
 
         [HttpGet("id/{id}")]
-        public async Task<IActionResult> GetTrainingTemplateAsync([FromQuery] int id)
+        public async Task<IActionResult> GetTrainingTemplateAsync(int id)
         {
-            return Ok(await trainingTemplateService.GetTrainingTemplateByIdAsync(id, userResolverService.GetUserId()));
+            TrainingTemplateDto result =
+                await trainingTemplateService.GetTrainingTemplateByIdAsync(id, userResolverService.GetUserId());
+            
+            if (result is null)
+                return BadRequest();
+            return Ok(result);
         }
 
         [HttpPost("add")]

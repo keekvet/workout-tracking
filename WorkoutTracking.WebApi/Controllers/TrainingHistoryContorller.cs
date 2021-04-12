@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkoutTracking.Application.Dto.TrainingHistory;
 using WorkoutTracking.Application.Models.Pagination.Base;
 using WorkoutTracking.Application.Services.Interfaces;
 
@@ -29,7 +30,10 @@ namespace Workout_tracking.Controllers
         [HttpGet("all")]
         public async Task<IActionResult> GetHistory([FromQuery]SortedPaginationModel model)
         {
-            return Ok(await trainingHistoryService.GetAllTrainingHistoriesAsync(model));
+            IEnumerable<TrainingHistoryDto> result = await trainingHistoryService.GetAllTrainingHistoriesAsync(model);
+            if (result is null)
+                return BadRequest();
+            return Ok(result);
         }
     }
 }
