@@ -13,7 +13,7 @@ namespace WorkoutTracking.Application.Extensions
         {
             exerciseProperty.Duration = exercisePropertyToCopy.Duration;
             exerciseProperty.DurationType = exercisePropertyToCopy.DurationType;
-            exerciseProperty.Weigth = exercisePropertyToCopy.Weigth;
+            exerciseProperty.Weight = exercisePropertyToCopy.Weight;
 
             return exerciseProperty;
         }
@@ -24,7 +24,7 @@ namespace WorkoutTracking.Application.Extensions
             {
                 Duration = exercise.Duration,
                 DurationType = exercise.DurationType,
-                Weigth = exercise.Weigth,
+                Weight = exercise.Weight,
             };
         }
     }

@@ -56,6 +56,17 @@ namespace WorkoutTracking.Application.Services.Implementations
             return mapper.Map<ExerciseProperty, ExercisePropertyDto>(exerciseProperty);
         }
 
+        public async Task<ExercisePropertyDto> GetExercisePropertyAsync(int id, int userId)
+        {
+            ExerciseProperty property = await exercisePropertyRepository.GetByIdAsync(id);
+
+            if (property?.Exercise.TrainingTemplate.CreatorId != userId)
+                return null;
+
+            return mapper.Map<ExerciseProperty, ExercisePropertyDto>(property);
+        }
+
+
         public async Task<ExercisePropertyDto> AddPropertyAsync(ExercisePropertyModel model, int userId)
         {
             ExerciseProperty exerciseProperty = mapper.Map<ExercisePropertyModel, ExerciseProperty>(model);

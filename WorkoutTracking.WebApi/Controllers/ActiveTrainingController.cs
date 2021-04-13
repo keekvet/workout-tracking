@@ -74,7 +74,7 @@ namespace Workout_tracking.Controllers
             bool result = await activeTrainingService.EndTrainingAsync(userResolverService.GetUserId());
 
             if (result)
-                return Ok();
+                return Ok(result);
             return BadRequest();
         }
 

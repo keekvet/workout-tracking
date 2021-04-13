@@ -26,6 +26,17 @@ namespace Workout_tracking.Controllers
             this.userResolverService = userResolverService;
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetExerciseAsync(int id)
+        {
+            ExerciseDto exerciseDto =
+                await exerciseService.GetExerciseAsync(id, userResolverService.GetUserId());
+
+            if (exerciseDto is null)
+                return BadRequest();
+            return Ok(exerciseDto);
+        }
+
         [HttpPost("add")]
         public async Task<IActionResult> AddExerciseAsync([FromBody] ExerciseModel exerciseModel)
         {
@@ -54,7 +65,7 @@ namespace Workout_tracking.Controllers
             bool result = await exerciseService.DeleteExerciseAsync(exerciseId, userResolverService.GetUserId());
 
             if (result)
-                return Ok();
+                return Ok(result);
             return BadRequest();
         }
     }

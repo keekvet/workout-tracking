@@ -46,7 +46,7 @@ namespace Workout_tracking.Controllers
             bool result = await scheduledTrainingService.DeleteScheduledTrainingById(
                 trainingScheduleId, userResolverService.GetUserId());
             if (result)
-                return Ok();
+                return Ok(result);
             return BadRequest();
         }
 
@@ -57,7 +57,7 @@ namespace Workout_tracking.Controllers
                 await scheduledTrainingService.GetAllScheduledTrainins(model, userResolverService.GetUserId());
             if (result is null)
                 return BadRequest();
-            return Ok();
+            return Ok(result);
         }
 
         [HttpGet("id/{trainingId}")]

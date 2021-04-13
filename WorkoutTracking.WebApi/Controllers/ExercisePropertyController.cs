@@ -28,6 +28,17 @@ namespace Workout_tracking.Controllers
             this.exercisePropertyService = exercisePropertyService;
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetExercisePropertyAsync(int id)
+        {
+            ExercisePropertyDto propertyDto =
+                await exercisePropertyService.GetExercisePropertyAsync(id, userResolverService.GetUserId());
+
+            if (propertyDto is null)
+                return BadRequest();
+            return Ok(propertyDto);
+        }
+
         [HttpPost("add")]
         public async Task<IActionResult> AddExercisePropertyAsync([FromBody] ExercisePropertyModel exerciseModel)
         {
@@ -57,7 +68,7 @@ namespace Workout_tracking.Controllers
                 await exercisePropertyService.DeletePropertyAsync(exercisePropertyId, userResolverService.GetUserId());
 
             if (result)
-                return Ok();
+                return Ok(result);
             return BadRequest();
         }
     }

@@ -12,7 +12,7 @@ namespace WorkoutTracking.Data.Entities
         public int Id { get; set; }
         public int Duration { get; set; }
         public ExerciseDurationType DurationType { get; set; }
-        public int Weigth { get; set; }
+        public int Weight { get; set; }
         public int ExerciseId { get; set; }
         public virtual Exercise Exercise { get; set; }
     }

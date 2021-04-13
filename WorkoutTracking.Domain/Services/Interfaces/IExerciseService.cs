@@ -13,6 +13,7 @@ namespace WorkoutTracking.Application.Services.Interfaces
     {
         Task<ExerciseDto> AddExerciseAsync(ExerciseModel model, int userId);
         Task<bool> DeleteExerciseAsync(int exerciseId, int userId);
+        Task<ExerciseDto> GetExerciseAsync(int id, int userId);
         Task<ExerciseDto> UpdateExerciseAsync(ExerciseUpdateModel model, int userId);
     }
 }

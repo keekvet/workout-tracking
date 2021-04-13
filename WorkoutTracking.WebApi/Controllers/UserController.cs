@@ -77,7 +77,7 @@ namespace Workout_tracking.Controllers
         {
             bool result = await userService.UpdatePasswordAsync(updatePasswordModel, userResolverService.GetUserId());
             if (result)
-                return Ok();
+                return Ok(result);
             return BadRequest();
         }
     }

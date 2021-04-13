@@ -35,6 +35,16 @@ namespace WorkoutTracking.Application.Services.Implementations
             return await UpsertExerciseAsync(mapper.Map<ExerciseUpdateModel, Exercise>(model), userId);
         }
 
+        public async Task<ExerciseDto> GetExerciseAsync(int id, int userId)
+        {
+            Exercise exercise = await exerciseRepository.GetByIdAsync(id);
+
+            if (exercise?.TrainingTemplate.CreatorId != userId)
+                return null;
+
+            return mapper.Map<Exercise, ExerciseDto>(exercise);
+        }
+
         public async Task<ExerciseDto> AddExerciseAsync(ExerciseModel model, int userId)
         {
             return await UpsertExerciseAsync(mapper.Map<ExerciseModel, Exercise>(model), userId);

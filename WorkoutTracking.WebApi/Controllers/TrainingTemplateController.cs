@@ -91,7 +91,7 @@ namespace Workout_tracking.Controllers
                 await trainingTemplateService.DeleteTrainingTemplateAsync(templateId, userResolverService.GetUserId());
 
             if (result)
-                return Ok();
+                return Ok(result);
             return BadRequest();
         }
 

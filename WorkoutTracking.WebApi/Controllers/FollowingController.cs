@@ -35,7 +35,7 @@ namespace Workout_tracking.Controllers
             bool result = await followingService.AddFollowingAsync(userToFollow, userResolverService.GetUserId());
 
             if(result)
-                return Ok();
+                return Ok(result);
             return BadRequest();
         }
 
@@ -45,7 +45,7 @@ namespace Workout_tracking.Controllers
             bool result = await followingService.RemoveFollowingAsync(userToUnfollow, userResolverService.GetUserId());
             
             if(result)
-                return Ok();
+                return Ok(result);
             return BadRequest();
         }
 

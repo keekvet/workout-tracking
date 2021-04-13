@@ -8,7 +8,7 @@ namespace WorkoutTracking.Data.Enums
 {
     public enum ExerciseDurationType
     {
-        Repeate,
+        Repeat,
         Second,
         Minute,
         Hour
