@@ -27,10 +27,7 @@ namespace Workout_tracking.Controllers
         [CredentialsFilter]
         public async Task<IActionResult> Register(UserRegisterModel user)
         {
-            UserDto userDto = await registerService.Register(user);
-            if (userDto is null)
-                return BadRequest();
-            return Ok(userDto);
+            return this.ConvertResult(await registerService.Register(user));
         }
     }
 }

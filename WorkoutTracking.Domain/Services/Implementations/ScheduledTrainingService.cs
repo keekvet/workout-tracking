@@ -75,7 +75,7 @@ namespace WorkoutTracking.Application.Services.Implementations
         public async Task<bool> DeleteScheduledTrainingById(int id, int userId)
         {
             ScheduledTraining scheduledTraining = await scheduledTrainingRepository.GetByIdAsync(id);
-            if (scheduledTraining.Template.CreatorId != userId)
+            if (scheduledTraining?.Template.CreatorId != userId)
                 return false;
 
             bool result = await scheduledTrainingRepository.DeleteAsync(scheduledTraining);

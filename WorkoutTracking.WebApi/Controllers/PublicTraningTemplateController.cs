@@ -32,58 +32,37 @@ namespace Workout_tracking.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> AddPublicTemplateAsync([FromBody] int templateId)
         {
-            PublicTrainingTemplateDto templateDto = 
-                await publicTraningService.AddPublicTemplateAsync(templateId, userResolverService.GetUserId());
-
-            if (templateDto is not null)
-                return Ok(templateDto);
-            return BadRequest();
+            return this.ConvertResult(
+                await publicTraningService.AddPublicTemplateAsync(templateId, userResolverService.GetUserId()));
         }
 
         [HttpPost("clone")]
         public async Task<IActionResult> ClonePublicTemplateAsync([FromBody] int templateId)
         {
-            TrainingTemplateDto templateDto =
-                await publicTraningService.ClonePublicTemplateAsync(templateId, userResolverService.GetUserId());
-
-            if (templateDto is not null)
-                return Ok(templateDto);
-            return BadRequest();
+            return this.ConvertResult(
+                await publicTraningService.ClonePublicTemplateAsync(templateId, userResolverService.GetUserId()));
         }
 
         [HttpDelete("remove")]
         public async Task<IActionResult> DeletePublicTemplateAsync([FromBody] int templateId)
         {
-            bool result = await publicTraningService.DeletePublicTemplateAsync(
-                templateId, 
-                userResolverService.GetUserId());
-
-            if (result)
-                return Ok(result);
-            return BadRequest();
+            return this.ConvertResult(
+                await publicTraningService.DeletePublicTemplateAsync(templateId, userResolverService.GetUserId()));
         }
 
         [HttpGet("all")]
         public async Task<IActionResult> GetPublicTemplatesAsync(
             [FromQuery] PublicTrainingTemplatePaginationModel model)
         {
-            IEnumerable<PublicTrainingTemplateDto> result =
-                await publicTraningService.GetPublicTemplatesAsync(model);
-            if (result is null)
-                return BadRequest();
-            return Ok(result);
+            return this.ConvertResult(await publicTraningService.GetPublicTemplatesAsync(model));
         }
 
         [HttpGet("user/{userId}")]
-        public async Task<IActionResult> GetPublicTemplates(
+        public async Task<IActionResult> GetPublicTemplatesAsync(
             [FromQuery] PublicTrainingTemplatePaginationModel model, 
             int userId)
         {
-            IEnumerable<PublicTrainingTemplateDto> result =
-                await publicTraningService.GetPublicTemplatesAsync(model, userId);
-            if (result is null)
-                return BadRequest();
-            return Ok(result);
+            return this.ConvertResult(await publicTraningService.GetPublicTemplatesAsync(model, userId));
         }
 
 

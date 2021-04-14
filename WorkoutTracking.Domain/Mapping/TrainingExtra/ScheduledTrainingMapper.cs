@@ -20,7 +20,8 @@ namespace WorkoutTracking.Application.Mapping.TrainingExtra
                 .ForMember(s => s.StartTime, opt => opt.MapFrom(m => TimeSpan.Parse(m.StartTime)));
 
             CreateMap<ScheduledTraining, ScheduledTrainingDto>()
-                .ForMember(d => d.StartTime, opt => opt.MapFrom(m => m.StartTime.ToString()));
+                .ForMember(d => d.StartTime, opt => opt.MapFrom(m => m.StartTime.ToString()))
+                .ForMember(d => d.TemplateName, opt => opt.MapFrom(m => m.Template.Name));
 
         }
     }

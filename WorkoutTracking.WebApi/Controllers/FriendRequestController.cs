@@ -34,56 +34,37 @@ namespace Workout_tracking.Controllers
         [HttpPost("send")]
         public async Task<IActionResult> SendFriendRequestAsync([FromBody] int receiverId)
         {
-            FriendRequestDto friendRequestDto =
-                await friendRequestService.AddFriendRequestAsync(receiverId, userResolverService.GetUserId());
-
-            if (friendRequestDto is null)
-                return BadRequest();
-
-            return Ok(friendRequestDto);
+            return this.ConvertResult(
+                await friendRequestService.AddFriendRequestAsync(receiverId, userResolverService.GetUserId()));
         }
 
         [HttpDelete("remove")]
         public async Task<IActionResult> RemoveFriendRequestAsync([FromBody] int friendId)
         {
-            bool result = 
-                await friendRequestService.RemoveFriendRequestAsync(friendId, userResolverService.GetUserId());
-            if (result)
-                return Ok(result);
-            return BadRequest();
+            return this.ConvertResult(
+                await friendRequestService.RemoveFriendRequestAsync(friendId, userResolverService.GetUserId()));
         }
 
 
         [HttpPut("update-state")]
         public async Task<IActionResult> UpdateFriendRequestStateAsync([FromBody] FriendRequestStateUpdateModel model)
         {
-            FriendRequestDto friendRequest =
-                await friendRequestService.UpdateFriendRequestStateAsync(model, userResolverService.GetUserId());
-
-            if (friendRequest is null)
-                return BadRequest();
-            return Ok(friendRequest);
+            return this.ConvertResult(
+                await friendRequestService.UpdateFriendRequestStateAsync(model, userResolverService.GetUserId()));
         }
 
         [HttpGet("input")]
         public async Task<IActionResult> GetInputRequestsAsync([FromQuery] SortedPaginationModel model)
         {
-            IEnumerable<FriendRequestDto> result =
-                await friendRequestService.GetInputFriendRequestsAsync(model, userResolverService.GetUserId());
-            if (result is null)
-                return BadRequest();
-            return Ok(result);
+            return this.ConvertResult(
+                await friendRequestService.GetInputFriendRequestsAsync(model, userResolverService.GetUserId()));
         }
 
         [HttpGet("output")]
         public async Task<IActionResult> GetOutputRequestsAsync([FromQuery] SortedPaginationModel model)
         {
-            IEnumerable<FriendRequestDto> result =
-                await friendRequestService.GetOutputFriendRequestsAsync(model, userResolverService.GetUserId());
-
-            if (result is null)
-                return BadRequest();
-            return Ok(result);
+            return this.ConvertResult(
+                await friendRequestService.GetOutputFriendRequestsAsync(model, userResolverService.GetUserId()));
         }
     }
 }

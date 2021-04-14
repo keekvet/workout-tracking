@@ -32,39 +32,26 @@ namespace Workout_tracking.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> AddFollowingAsync([FromBody] int userToFollow)
         {
-            bool result = await followingService.AddFollowingAsync(userToFollow, userResolverService.GetUserId());
-
-            if(result)
-                return Ok(result);
-            return BadRequest();
+            return this.ConvertResult(await followingService.AddFollowingAsync(userToFollow, userResolverService.GetUserId()));
         }
 
         [HttpDelete("remove")]
         public async Task<IActionResult> RemoveFollowingAsync([FromBody] int userToUnfollow)
         {
-            bool result = await followingService.RemoveFollowingAsync(userToUnfollow, userResolverService.GetUserId());
-            
-            if(result)
-                return Ok(result);
-            return BadRequest();
+            return this.ConvertResult(
+                await followingService.RemoveFollowingAsync(userToUnfollow, userResolverService.GetUserId()));
         }
 
         [HttpGet("following")]
         public async Task<IActionResult> GetFollowingAsync([FromQuery] FollowingPaginationModel model)
         {
-            IEnumerable<UserDto> users = await followingService.GetFollowingAsync(model);
-            if(users is not null)
-                return Ok(users);
-            return BadRequest();
+            return this.ConvertResult(await followingService.GetFollowingAsync(model));
         }
 
         [HttpGet("followers")]
         public async Task<IActionResult> GetFollowersAsync([FromQuery] FollowingPaginationModel model)
         {
-            IEnumerable<UserDto> users = await followingService.GetFollowersAsync(model);
-            if (users is not null)
-                return Ok(users);
-            return BadRequest();
+            return this.ConvertResult(await followingService.GetFollowersAsync(model));
         }
     }
 }

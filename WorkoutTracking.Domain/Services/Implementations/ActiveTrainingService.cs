@@ -17,7 +17,6 @@ namespace WorkoutTracking.Application.Services.Implementations
     {
         private readonly IMapper mapper;
         private readonly IRepository<User> userRepository;
-        private readonly IExerciseService exerciseService;
         private readonly ITrainingHistoryService trainingHistoryService;
         private readonly IExerciseHistoryService exerciseHistoryService;
         private readonly IRepository<ActiveTraining> activeTrainingRepository;
@@ -26,7 +25,6 @@ namespace WorkoutTracking.Application.Services.Implementations
 
         public ActiveTrainingService(
             IMapper mapper,
-            IExerciseService exerciseService,
             IRepository<User> userRepository,
             ITrainingHistoryService trainingHistoryService,
             IExerciseHistoryService exerciseHistoryService,
@@ -36,7 +34,6 @@ namespace WorkoutTracking.Application.Services.Implementations
         {
             this.mapper = mapper;
             this.userRepository = userRepository;
-            this.exerciseService = exerciseService;
             this.trainingHistoryService = trainingHistoryService;
             this.exerciseHistoryService = exerciseHistoryService;
             this.activeTrainingRepository = activeTrainingRepository;

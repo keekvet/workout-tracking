@@ -28,10 +28,7 @@ namespace Workout_tracking.Controllers
         [CredentialsFilter]
         public async Task<IActionResult> Login(UserLoginModel user)
         {
-            UserTokenDto result = await loginService.LoginAsync(user);
-            if (result is null)
-                return BadRequest();
-            return Ok(result);
+            return this.ConvertResult(await loginService.LoginAsync(user));
         }
     }
 }

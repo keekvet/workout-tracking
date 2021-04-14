@@ -30,52 +30,32 @@ namespace Workout_tracking.Controllers
         [HttpGet("get")]
         public async Task<IActionResult> GetActiveTrainingAsync()
         {
-            ActiveTrainingDto activeTraining =
-                await activeTrainingService.GetActiveTrainingAsync(userResolverService.GetUserId());
-            
-            if (activeTraining is null)
-                return BadRequest();
-            return Ok(activeTraining);
+            return this.ConvertResult(await activeTrainingService.GetActiveTrainingAsync(userResolverService.GetUserId()));
         }
 
         [HttpPost("start")]
         public async Task<IActionResult> StartTrainingAsync([FromBody] int trainingTemplateId)
         {
-            ActiveTrainingDto activeTraining =
-                await activeTrainingService.StartTrainingAsync(trainingTemplateId, userResolverService.GetUserId());
-
-            if (activeTraining is null)
-                return BadRequest();
-            return Ok(activeTraining);
+            return this.ConvertResult(
+                await activeTrainingService.StartTrainingAsync(trainingTemplateId, userResolverService.GetUserId()));
         }
 
-        [HttpGet("next-exercise")]
+        [HttpGet("exercise")]
         public async Task<IActionResult> GetExerciseAsync()
         {
-            ExerciseDto exercise= await activeTrainingService.GetExerciseAsync(userResolverService.GetUserId());
-            if (exercise is null)
-                return BadRequest();
-            return Ok(exercise);
+            return this.ConvertResult(await activeTrainingService.GetExerciseAsync(userResolverService.GetUserId()));
         }
 
         [HttpPost("perform-exercise")]
         public async Task<IActionResult> PeformExerciseAsync()
         {
-            ExerciseDto exerciseDto = await activeTrainingService.PeformExerciseAsync(userResolverService.GetUserId());
-            
-            if (exerciseDto is null)
-                return BadRequest();
-            return Ok(exerciseDto);
+            return this.ConvertResult(await activeTrainingService.PeformExerciseAsync(userResolverService.GetUserId()));
         }
 
         [HttpDelete("end")]
         public async Task<IActionResult> EndTraininAsync()
         {
-            bool result = await activeTrainingService.EndTrainingAsync(userResolverService.GetUserId());
-
-            if (result)
-                return Ok(result);
-            return BadRequest();
+            return this.ConvertResult(await activeTrainingService.EndTrainingAsync(userResolverService.GetUserId()));
         }
 
     }

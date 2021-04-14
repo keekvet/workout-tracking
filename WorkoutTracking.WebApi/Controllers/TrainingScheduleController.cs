@@ -31,45 +31,29 @@ namespace Workout_tracking.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> AddTrainingSchedule([FromBody] ScheduledTrainingModel model)
         {
-            ScheduledTrainingDto scheduledTraining =
-                await scheduledTrainingService.AddScheduledTraining(model, userResolverService.GetUserId());
-
-            if (scheduledTraining is null)
-                return BadRequest();
-
-            return Ok(scheduledTraining);
+            return this.ConvertResult(
+                await scheduledTrainingService.AddScheduledTraining(model, userResolverService.GetUserId()));
         }
 
         [HttpDelete("remove")]
         public async Task<IActionResult> DeleteTrainingScheduleById([FromBody] int trainingScheduleId)
         {
-            bool result = await scheduledTrainingService.DeleteScheduledTrainingById(
-                trainingScheduleId, userResolverService.GetUserId());
-            if (result)
-                return Ok(result);
-            return BadRequest();
+            return this.ConvertResult(
+                await scheduledTrainingService.DeleteScheduledTrainingById(trainingScheduleId, userResolverService.GetUserId()));
         }
 
         [HttpGet("all")]
         public async Task<IActionResult> GetAllTrainingSchedules([FromQuery]SortedPaginationModel model)
         {
-            IEnumerable<ScheduledTrainingDto> result =
-                await scheduledTrainingService.GetAllScheduledTrainins(model, userResolverService.GetUserId());
-            if (result is null)
-                return BadRequest();
-            return Ok(result);
+            return this.ConvertResult(
+                await scheduledTrainingService.GetAllScheduledTrainins(model, userResolverService.GetUserId()));
         }
 
         [HttpGet("id/{trainingId}")]
         public async Task<IActionResult> GetTrainingScheduleById(int trainingId)
         {
-            ScheduledTrainingDto result =
-                await scheduledTrainingService.GetScheduledTrainingById(trainingId, userResolverService.GetUserId());
-
-            if (result is null)
-                return BadRequest();
-
-            return Ok(result);
+            return this.ConvertResult(
+                await scheduledTrainingService.GetScheduledTrainingById(trainingId, userResolverService.GetUserId()));
         }
     }
 }

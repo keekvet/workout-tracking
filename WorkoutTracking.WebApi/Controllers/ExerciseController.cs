@@ -29,44 +29,29 @@ namespace Workout_tracking.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetExerciseAsync(int id)
         {
-            ExerciseDto exerciseDto =
-                await exerciseService.GetExerciseAsync(id, userResolverService.GetUserId());
-
-            if (exerciseDto is null)
-                return BadRequest();
-            return Ok(exerciseDto);
+            return this.ConvertResult(await exerciseService.GetExerciseAsync(id, userResolverService.GetUserId()));
         }
 
         [HttpPost("add")]
         public async Task<IActionResult> AddExerciseAsync([FromBody] ExerciseModel exerciseModel)
         {
-            ExerciseDto exerciseDto = 
-                await exerciseService.AddExerciseAsync(exerciseModel, userResolverService.GetUserId());
+            return this.ConvertResult(
+                await exerciseService.AddExerciseAsync(exerciseModel, userResolverService.GetUserId()));
 
-            if (exerciseDto is null)
-                return BadRequest();
-            return Ok(exerciseDto);
         }
 
         [HttpPut("update")]
         public async Task<IActionResult> UpdateExerciseAsync([FromBody] ExerciseUpdateModel exerciseUpdateModel)
         {
-            ExerciseDto exerciseDto =
-                await exerciseService.UpdateExerciseAsync(exerciseUpdateModel, userResolverService.GetUserId());
-
-            if (exerciseDto is null)
-                return BadRequest();
-            return Ok(exerciseDto);
+            return this.ConvertResult(
+                await exerciseService.UpdateExerciseAsync(exerciseUpdateModel, userResolverService.GetUserId()));
         }
 
         [HttpDelete("remove")]
         public async Task<IActionResult> RemoveExerciseAsync([FromBody] int exerciseId)
         {
-            bool result = await exerciseService.DeleteExerciseAsync(exerciseId, userResolverService.GetUserId());
-
-            if (result)
-                return Ok(result);
-            return BadRequest();
+            return this.ConvertResult(
+                await exerciseService.DeleteExerciseAsync(exerciseId, userResolverService.GetUserId()));
         }
     }
 }

@@ -26,10 +26,7 @@ namespace Workout_tracking.Controllers
         [HttpGet("all")]
         public async Task<IActionResult> GetCategoriesAll([FromQuery] SortedPaginationModel model)
         {
-            IEnumerable<TrainingCategoryDto> result = await trainingCategoryService.GetAllAsync(model);
-            if (result is null)
-                return BadRequest();
-            return Ok(result);
+            return this.ConvertResult(await trainingCategoryService.GetAllAsync(model));
         }
     }
 }

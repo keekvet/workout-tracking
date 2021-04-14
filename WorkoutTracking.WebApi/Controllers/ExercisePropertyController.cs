@@ -31,45 +31,29 @@ namespace Workout_tracking.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetExercisePropertyAsync(int id)
         {
-            ExercisePropertyDto propertyDto =
-                await exercisePropertyService.GetExercisePropertyAsync(id, userResolverService.GetUserId());
+            return this.ConvertResult(
+                await exercisePropertyService.GetExercisePropertyAsync(id, userResolverService.GetUserId()));
 
-            if (propertyDto is null)
-                return BadRequest();
-            return Ok(propertyDto);
         }
 
         [HttpPost("add")]
         public async Task<IActionResult> AddExercisePropertyAsync([FromBody] ExercisePropertyModel exerciseModel)
         {
-            ExercisePropertyDto exercisePropertyDto =
-                await exercisePropertyService.AddPropertyAsync(exerciseModel, userResolverService.GetUserId());
-
-            if (exercisePropertyDto is null)
-                return BadRequest();
-            return Ok(exercisePropertyDto);
+            return this.ConvertResult(
+                await exercisePropertyService.AddPropertyAsync(exerciseModel, userResolverService.GetUserId()));
         }
 
         [HttpPut("update")]
         public async Task<IActionResult> UpdateExercisePropertyAsync([FromBody] ExercisePropertyUpdateModel exerciseUpdateModel)
         {
-            ExercisePropertyDto exerciseDto =
-                await exercisePropertyService.UpdatePropertyAsync(exerciseUpdateModel, userResolverService.GetUserId());
-
-            if (exerciseDto is null)
-                return BadRequest();
-            return Ok(exerciseDto);
+            return this.ConvertResult(
+                await exercisePropertyService.UpdatePropertyAsync(exerciseUpdateModel, userResolverService.GetUserId()));
         }
 
         [HttpDelete("remove")]
         public async Task<IActionResult> RemoveExercisePropertyAsync([FromBody] int exercisePropertyId)
         {
-            bool result = 
-                await exercisePropertyService.DeletePropertyAsync(exercisePropertyId, userResolverService.GetUserId());
-
-            if (result)
-                return Ok(result);
-            return BadRequest();
+            return this.ConvertResult(await exercisePropertyService.DeletePropertyAsync(exercisePropertyId, userResolverService.GetUserId()));
         }
     }
 }

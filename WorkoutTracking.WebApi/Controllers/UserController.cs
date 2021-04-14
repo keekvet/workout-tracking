@@ -36,49 +36,34 @@ namespace Workout_tracking.Controllers
         [HttpGet("{name}")]
         public async Task<IActionResult> GetUserByNameAsync(string name)
         {
-            UserDto user = await userService.GetUserByNameAsync(name, userResolverService.GetUserId());
-            if (user is null)
-                return BadRequest();
-            return Ok(user);
+            return this.ConvertResult(await userService.GetUserByNameAsync(name, userResolverService.GetUserId()));
         }
 
         [HttpGet("id/{id}")]
         public async Task<IActionResult> GetUserByIdAsync(int id)
         {
-            UserDto user = await userService.GetUserByIdAsync(id, userResolverService.GetUserId());
-            if (user is null)
-                return BadRequest();
-            return Ok(user);
+            return this.ConvertResult(await userService.GetUserByIdAsync(id, userResolverService.GetUserId()));
         }
 
         [HttpGet("search")]
         public async Task<IActionResult> SearchUsersAsync([FromQuery] UserSearchPaginationModel userSearchModel)
         {
-            IEnumerable<UserDto> users = await userService.GetUsersWithNameAsync(userSearchModel);
-            if (users is null)
-                return BadRequest();
-            return Ok(users);
+            return this.ConvertResult(await userService.GetUsersWithNameAsync(userSearchModel));
         }
 
         [HttpPut("update")]
         public async Task<IActionResult> UpdateUserAsync([FromBody] UserUpdateModel userUpdateModel)
         {
-            UserDto user = await userService.UpdateUserAsync(userUpdateModel, userResolverService.GetUserId());
-            
-            if (user is not null)
-                return Ok(user);
-            
-            return BadRequest();
+            return this.ConvertResult(
+                await userService.UpdateUserAsync(userUpdateModel, userResolverService.GetUserId()));
         }
 
         [CredentialsFilter]
         [HttpPut("update/password")]
         public async Task<IActionResult> UpdateUserPasswordAsync([FromBody] PasswordUpdateModel updatePasswordModel)
         {
-            bool result = await userService.UpdatePasswordAsync(updatePasswordModel, userResolverService.GetUserId());
-            if (result)
-                return Ok(result);
-            return BadRequest();
+            return this.ConvertResult(
+                await userService.UpdatePasswordAsync(updatePasswordModel, userResolverService.GetUserId()));
         }
     }
 }

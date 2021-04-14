@@ -30,10 +30,8 @@ namespace Workout_tracking.Controllers
         [HttpGet("all")]
         public async Task<IActionResult> GetHistory([FromQuery]SortedPaginationModel model)
         {
-            IEnumerable<TrainingHistoryDto> result = await trainingHistoryService.GetAllTrainingHistoriesAsync(model);
-            if (result is null)
-                return BadRequest();
-            return Ok(result);
+            return this.ConvertResult(
+                await trainingHistoryService.GetAllTrainingHistoriesAsync(model));
         }
     }
 }

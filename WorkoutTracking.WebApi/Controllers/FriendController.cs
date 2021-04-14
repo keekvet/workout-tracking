@@ -28,19 +28,14 @@ namespace Workout_tracking.Controllers
         [HttpDelete("remove")]
         public async Task<IActionResult> RemoveFriendAsync([FromBody] int id)
         {
-            bool result = await friendService.RemoveFriendAsync(id, userResolverService.GetUserId());
-            if (result)
-                return Ok(result);
-            return BadRequest();
+            return this.ConvertResult(await friendService.RemoveFriendAsync(id, userResolverService.GetUserId()));
         }
 
         [HttpGet("all")]
         public async Task<IActionResult> GetFriendsAsync([FromQuery] FriendPaginationModel model)
         {
-            IEnumerable<UserDto> result = await friendService.GetFriendsAsync(model);
-            if (result is null)
-                return BadRequest();
-            return Ok(result);
+            return this.ConvertResult(
+                await friendService.GetFriendsAsync(model));
         }
     }
 }

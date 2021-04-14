@@ -32,67 +32,43 @@ namespace Workout_tracking.Controllers
         [HttpGet("all")]
         public async Task<IActionResult> GetTrainingTemplatesAsync([FromQuery] SortedPaginationModel model)
         {
-            IEnumerable<TrainingTemplateDto> result = await trainingTemplateService
-                .GetTrainingTemplatesByUserIdAsync(model, userResolverService.GetUserId());
-            
-            if (result is null)
-                return BadRequest();
-            return Ok(result);
+            return this.ConvertResult(
+                await trainingTemplateService.GetTrainingTemplatesByUserIdAsync(model, userResolverService.GetUserId()));
         }
 
         [HttpGet("id/{id}")]
         public async Task<IActionResult> GetTrainingTemplateAsync(int id)
         {
-            TrainingTemplateDto result =
-                await trainingTemplateService.GetTrainingTemplateByIdAsync(id, userResolverService.GetUserId());
-            
-            if (result is null)
-                return BadRequest();
-            return Ok(result);
+            return this.ConvertResult(
+                await trainingTemplateService.GetTrainingTemplateByIdAsync(id, userResolverService.GetUserId()));
         }
 
         [HttpPost("add")]
         public async Task<IActionResult> AddTrainigTemplateAsync([FromBody] TrainingTemplateModel model)
         {
-            TrainingTemplateDto trainingTemplateDto =
-                await trainingTemplateService.AddTrainingTemplateAsync(model, userResolverService.GetUserId());
-            
-            if (trainingTemplateDto is not null)
-                return Ok(trainingTemplateDto);
-            return BadRequest();
+            return this.ConvertResult(
+                await trainingTemplateService.AddTrainingTemplateAsync(model, userResolverService.GetUserId()));
         }
 
         [HttpPost("clone")]
         public async Task<IActionResult> CloneTrainigTemplateAsync([FromBody] int templateId)
         {
-            TrainingTemplateDto trainingTemplateDto =
-                await trainingTemplateService.CloneForCreatorAsync(templateId, userResolverService.GetUserId());
-
-            if (trainingTemplateDto is not null)
-                return Ok(trainingTemplateDto);
-            return BadRequest();
+            return this.ConvertResult(
+                await trainingTemplateService.CloneForCreatorAsync(templateId, userResolverService.GetUserId()));
         }
 
         [HttpPut("update")]
         public async Task<IActionResult> UpdateTrainingTemplateAsync([FromBody] TrainingTemplateUpdateModel model)
         {
-            TrainingTemplateDto trainingTemplateDto =
-                await trainingTemplateService.UpdateTrainingTemplateAsync(model, userResolverService.GetUserId());
-
-            if (trainingTemplateDto is not null)
-                return Ok(trainingTemplateDto);
-            return BadRequest();
+            return this.ConvertResult(
+                await trainingTemplateService.UpdateTrainingTemplateAsync(model, userResolverService.GetUserId()));
         }
 
         [HttpDelete("remove")]
         public async Task<IActionResult> DeleteTrainingTemplateAsync([FromBody] int templateId)
         {
-            bool result =
-                await trainingTemplateService.DeleteTrainingTemplateAsync(templateId, userResolverService.GetUserId());
-
-            if (result)
-                return Ok(result);
-            return BadRequest();
+            return this.ConvertResult(
+                await trainingTemplateService.DeleteTrainingTemplateAsync(templateId, userResolverService.GetUserId()));
         }
 
     }

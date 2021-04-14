@@ -13,7 +13,8 @@ namespace WorkoutTracking.Application.Mapping.TrainingExtra
     {
         public ActiveTrainingMapper()
         {
-            CreateMap<ActiveTraining, ActiveTrainingDto>();
+            CreateMap<ActiveTraining, ActiveTrainingDto>()
+                .ForMember(d => d.TrainingTemplateName, opt => opt.MapFrom(a => a.TrainingTemplate.Name));
         }
     }
 }
